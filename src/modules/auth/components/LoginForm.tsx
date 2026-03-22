@@ -77,7 +77,7 @@ export function LoginForm() {
         Don&apos;t have an account?{" "}
         <Link
           href="/register"
-          className="font-medium text-neutral-900 underline-offset-4 hover:underline"
+          className="font-medium text-blue-600 underline-offset-4 hover:underline hover:text-blue-700"
         >
           Create one
         </Link>

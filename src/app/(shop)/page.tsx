@@ -41,7 +41,7 @@ export default async function HomePage() {
     <>
       <HomeJsonLd />
 
-      <section className="bg-neutral-50 border-b border-neutral-200">
+      <section className="bg-gradient-to-b from-blue-50 to-white border-b border-blue-100">
         <Container className="py-20 text-center">
           <h1 className="text-4xl font-bold tracking-tight text-neutral-900 sm:text-6xl">
             Discover our collection
@@ -50,7 +50,7 @@ export default async function HomePage() {
             Curated products, delivered with care. Find everything you need in one place.
           </p>
           <div className="mt-8 flex justify-center gap-4">
-            <Button asChild size="lg">
+            <Button asChild variant="cta" size="lg">
               <Link href="/products">Shop Now</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
@@ -65,7 +65,7 @@ export default async function HomePage() {
           <h2 className="text-2xl font-bold tracking-tight text-neutral-900">
             Featured Products
           </h2>
-          <Link href="/products" className="text-sm font-medium text-neutral-900 hover:underline">
+          <Link href="/products" className="text-sm font-medium text-blue-600 hover:text-blue-700 hover:underline transition-colors">
             View all →
           </Link>
         </div>

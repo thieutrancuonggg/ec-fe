@@ -27,7 +27,7 @@ export function AdminHeader({ title }: AdminHeaderProps) {
         </Button>
 
         <div className="flex items-center gap-2 border-l border-neutral-200 pl-3">
-          <div className="h-8 w-8 rounded-full bg-neutral-900 flex items-center justify-center text-xs font-bold text-white">
+          <div className="h-8 w-8 rounded-full bg-blue-600 flex items-center justify-center text-xs font-bold text-white">
             {user?.firstName?.charAt(0).toUpperCase() ?? "A"}
           </div>
           {user && (

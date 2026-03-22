@@ -23,7 +23,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   const thumbnail = product.images[0];
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white transition-shadow hover:shadow-md">
+    <article className="group relative flex flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white transition-all duration-200 hover:shadow-lg hover:shadow-blue-100/60 hover:-translate-y-0.5">
       <Link
         href={`/products/${product.slug}`}
         className="relative aspect-square overflow-hidden bg-neutral-50"
@@ -77,7 +77,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             className="flex items-center gap-1"
             aria-label={`Rating: ${product.rating} out of 5`}
           >
-            <span className="text-yellow-400 text-xs">
+            <span className="text-amber-400 text-xs">
               {"★".repeat(Math.round(product.rating))}
             </span>
             <span className="text-xs text-neutral-400">({product.reviewCount})</span>

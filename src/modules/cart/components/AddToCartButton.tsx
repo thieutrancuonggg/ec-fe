@@ -14,6 +14,7 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
 
   return (
     <Button
+      variant="cta"
       size="lg"
       className="w-full"
       disabled={!product.inStock}

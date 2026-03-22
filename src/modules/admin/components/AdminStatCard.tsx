@@ -25,8 +25,8 @@ export function AdminStatCard({
     >
       <div className="flex items-center justify-between">
         <p className="text-sm font-medium text-neutral-500">{title}</p>
-        <div className="rounded-md bg-neutral-100 p-2">
-          <Icon className="h-4 w-4 text-neutral-700" />
+        <div className="rounded-md bg-blue-50 p-2">
+          <Icon className="h-4 w-4 text-blue-600" />
         </div>
       </div>
       <p className="text-2xl font-bold text-neutral-900">{value}</p>

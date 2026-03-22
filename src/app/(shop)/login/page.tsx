@@ -13,7 +13,7 @@ export default function LoginPage() {
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
-          <Link href="/" className="text-xl font-bold text-neutral-900">
+          <Link href="/" className="text-xl font-bold text-blue-600">
             {siteConfig.name}
           </Link>
           <h1 className="mt-4 text-2xl font-semibold text-neutral-900">

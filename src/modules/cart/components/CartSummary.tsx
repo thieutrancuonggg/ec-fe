@@ -25,7 +25,7 @@ export function CartSummary() {
           <dt className="text-neutral-500">Shipping</dt>
           <dd className="font-medium text-neutral-900">
             {shippingFree ? (
-              <span className="text-green-600">Free</span>
+              <span className="text-emerald-600 font-semibold">Free</span>
             ) : (
               formatPrice(shipping)
             )}
@@ -42,7 +42,7 @@ export function CartSummary() {
         </div>
       </dl>
 
-      <Button asChild className="w-full">
+      <Button asChild variant="cta" className="w-full h-12 text-base">
         <Link href="/checkout">Proceed to Checkout</Link>
       </Button>
     </div>

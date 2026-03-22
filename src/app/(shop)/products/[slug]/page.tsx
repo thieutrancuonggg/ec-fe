@@ -86,7 +86,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               <h1 className="mt-1 text-3xl font-bold tracking-tight text-neutral-900">{product.name}</h1>
               {product.rating > 0 && (
                 <div className="mt-2 flex items-center gap-2">
-                  <span className="text-yellow-400" aria-hidden="true">{"★".repeat(Math.round(product.rating))}{"☆".repeat(5 - Math.round(product.rating))}</span>
+                  <span className="text-amber-400" aria-hidden="true">{"★".repeat(Math.round(product.rating))}{"☆".repeat(5 - Math.round(product.rating))}</span>
                   <span className="text-sm text-neutral-500">{product.rating.toFixed(1)} ({product.reviewCount} reviews)</span>
                 </div>
               )}

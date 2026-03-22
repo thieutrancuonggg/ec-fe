@@ -24,21 +24,21 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-neutral-200 bg-neutral-50">
+    <footer className="mt-auto bg-slate-900">
       <Container className="py-12">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="text-lg font-bold tracking-tight text-neutral-900">
+            <Link href="/" className="text-lg font-bold tracking-tight text-white">
               {siteConfig.name}
             </Link>
-            <p className="mt-2 text-sm text-neutral-500 max-w-xs">
+            <p className="mt-2 text-sm text-slate-400 max-w-xs">
               {siteConfig.description}
             </p>
           </div>
 
           {Object.entries(footerLinks).map(([section, links]) => (
             <div key={section}>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-neutral-900">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-white">
                 {section}
               </h3>
               <ul className="mt-3 space-y-2">
@@ -46,7 +46,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
+                      className="text-sm text-slate-400 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -57,7 +57,7 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-8 border-t border-neutral-200 pt-8 text-center text-xs text-neutral-400">
+        <div className="mt-8 border-t border-slate-700 pt-8 text-center text-xs text-slate-500">
           © <CopyrightYear /> {siteConfig.name}. All rights reserved.
         </div>
       </Container>
