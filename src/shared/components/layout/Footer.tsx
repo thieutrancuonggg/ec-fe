@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "./Container";
 import { siteConfig } from "@/config/site";
+import { CopyrightYear } from "./CopyrightYear";
 
 const footerLinks = {
   shop: [
@@ -57,7 +58,7 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-neutral-200 pt-8 text-center text-xs text-neutral-400">
-          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+          © <CopyrightYear /> {siteConfig.name}. All rights reserved.
         </div>
       </Container>
     </footer>

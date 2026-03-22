@@ -72,20 +72,23 @@ export async function getProducts(params: ProductListParams) {
   cacheLife(CACHE.PRODUCT_LIST_TTL);
   cacheTag("products");
 
-  const data = await gqlFetch<ProductsResponse>(GET_PRODUCTS, {
-    filter: {
-      categorySlug: params.category,
-      search: params.q,
-      sale: params.sale,
-      minPrice: params.minPrice,
-      maxPrice: params.maxPrice,
-    },
-    sort: params.sort ? parseSortParam(params.sort) : undefined,
-    page: params.page ?? 1,
-    limit: params.limit ?? PAGINATION.DEFAULT_PAGE_SIZE,
-  });
-
-  return data.products;
+  try {
+    const data = await gqlFetch<ProductsResponse>(GET_PRODUCTS, {
+      filter: {
+        categorySlug: params.category,
+        search: params.q,
+        sale: params.sale,
+        minPrice: params.minPrice,
+        maxPrice: params.maxPrice,
+      },
+      sort: params.sort ? parseSortParam(params.sort) : undefined,
+      page: params.page ?? 1,
+      limit: params.limit ?? PAGINATION.DEFAULT_PAGE_SIZE,
+    });
+    return data.products;
+  } catch {
+    return { data: [], total: 0, page: 1, limit: PAGINATION.DEFAULT_PAGE_SIZE, totalPages: 0 };
+  }
 }
 
 export async function getFeaturedProducts(limit = 8) {
@@ -93,12 +96,15 @@ export async function getFeaturedProducts(limit = 8) {
   cacheLife(CACHE.PRODUCT_LIST_TTL);
   cacheTag("products", "featured");
 
-  const data = await gqlFetch<{ products: { data: Product[] } }>(
-    GET_FEATURED_PRODUCTS,
-    { limit }
-  );
-
-  return data.products.data;
+  try {
+    const data = await gqlFetch<{ products: { data: Product[] } }>(
+      GET_FEATURED_PRODUCTS,
+      { limit }
+    );
+    return data.products.data;
+  } catch {
+    return [];
+  }
 }
 
 export async function getProductBySlug(slug: string) {
@@ -106,8 +112,12 @@ export async function getProductBySlug(slug: string) {
   cacheLife(CACHE.PRODUCT_TTL);
   cacheTag("products", `product:${slug}`);
 
-  const data = await gqlFetch<ProductResponse>(GET_PRODUCT_BY_SLUG, { slug });
-  return data.product;
+  try {
+    const data = await gqlFetch<ProductResponse>(GET_PRODUCT_BY_SLUG, { slug });
+    return data.product;
+  } catch {
+    return null;
+  }
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
