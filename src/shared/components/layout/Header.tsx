@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 import { CartHeaderButton } from "@/modules/cart/components/CartHeaderButton";
 import { SearchBar } from "./SearchBar";
 import { MobileMenuButton } from "./MobileMenu";
+import { UserMenu } from "./UserMenu";
 
 const navLinks = [
   { label: "Products", href: "/products" },
@@ -54,6 +55,8 @@ export function Header() {
             {/* Right actions */}
             <div className="flex items-center gap-2 ml-auto">
               <SearchBar />
+              <div className="h-6 w-px bg-neutral-200 hidden sm:block" />
+              <UserMenu />
               <div className="h-6 w-px bg-neutral-200 hidden sm:block" />
               <CartHeaderButton />
             </div>
