@@ -6,9 +6,22 @@ import {
   ApolloClient,
   InMemoryCache,
 } from "@apollo/client-integration-nextjs";
-import { HttpLink, from, CombinedGraphQLErrors } from "@apollo/client";
+import { ApolloLink, HttpLink, from, CombinedGraphQLErrors } from "@apollo/client";
 import { ErrorLink } from "@apollo/client/link/error";
 import { env } from "@/config/env";
+import { useAuthStore } from "@/modules/auth/store/authStore";
+
+function createAuthLink() {
+  return new ApolloLink((operation, forward) => {
+    const { accessToken } = useAuthStore.getState();
+    if (accessToken) {
+      operation.setContext(({ headers = {} }: { headers: Record<string, string> }) => ({
+        headers: { ...headers, Authorization: `Bearer ${accessToken}` },
+      }));
+    }
+    return forward(operation);
+  });
+}
 
 function createErrorLink() {
   return new ErrorLink(({ error, operation }) => {
@@ -57,7 +70,7 @@ function createCache() {
 
 export function getApolloClient(): ApolloClient {
   return new ApolloClient({
-    link: from([createErrorLink(), createHttpLink()]),
+    link: from([createAuthLink(), createErrorLink(), createHttpLink()]),
     cache: createCache(),
   });
 }
