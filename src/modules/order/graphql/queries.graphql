@@ -1,0 +1,65 @@
+query GetMyOrders($page: Int, $limit: Int) {
+  myOrders(page: $page, limit: $limit) {
+    data {
+      id
+      status
+      total
+      createdAt
+      trackingNumber
+      items {
+        quantity
+        priceAtPurchase
+        product {
+          id
+          name
+          slug
+          images {
+            url
+            alt
+            width
+            height
+          }
+        }
+      }
+    }
+    total
+    totalPages
+  }
+}
+
+query GetOrderById($id: String!) {
+  order(id: $id) {
+    id
+    status
+    subtotal
+    shipping
+    tax
+    total
+    createdAt
+    trackingNumber
+    shippingAddress {
+      firstName
+      lastName
+      street
+      city
+      state
+      zip
+      country
+    }
+    items {
+      quantity
+      priceAtPurchase
+      product {
+        id
+        name
+        slug
+        images {
+          url
+          alt
+          width
+          height
+        }
+      }
+    }
+  }
+}

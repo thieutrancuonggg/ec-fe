@@ -1,0 +1,25 @@
+query GetProducts($filter: ProductFilterInput, $sort: ProductSortInput, $page: Int, $limit: Int) {
+  products(filter: $filter, sort: $sort, page: $page, limit: $limit) {
+    data {
+      ...ProductCardFields
+    }
+    total
+    page
+    limit
+    totalPages
+  }
+}
+
+query GetFeaturedProducts($limit: Int) {
+  products(filter: { featured: true }, limit: $limit) {
+    data {
+      ...ProductCardFields
+    }
+  }
+}
+
+query GetProductBySlug($slug: String!) {
+  product(slug: $slug) {
+    ...ProductDetailFields
+  }
+}

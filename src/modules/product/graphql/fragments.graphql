@@ -1,0 +1,44 @@
+fragment ProductImageFields on ProductImage {
+  url
+  alt
+  width
+  height
+}
+
+fragment ProductCategoryFields on ProductCategory {
+  id
+  name
+  slug
+}
+
+fragment ProductCardFields on Product {
+  id
+  name
+  slug
+  price
+  compareAtPrice
+  inStock
+  featured
+  rating
+  reviewCount
+  images {
+    ...ProductImageFields
+  }
+  category {
+    ...ProductCategoryFields
+  }
+}
+
+fragment ProductDetailFields on Product {
+  ...ProductCardFields
+  description
+  tags
+  variants {
+    id
+    name
+    value
+    available
+    priceModifier
+  }
+  createdAt
+}

@@ -1,0 +1,21 @@
+query GetMe {
+  me {
+    id
+    email
+    firstName
+    lastName
+    avatar
+    addresses {
+      id
+      firstName
+      lastName
+      street
+      city
+      state
+      zip
+      country
+      isDefault
+    }
+    createdAt
+  }
+}
