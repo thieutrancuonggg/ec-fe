@@ -1,6 +1,7 @@
 // Cart → CSR with Zustand
 "use client";
 
+import { Typography } from "antd";
 import { Container } from "@/shared/components/layout/Container";
 import { CartItem } from "@/modules/cart/components/CartItem";
 import { CartSummary } from "@/modules/cart/components/CartSummary";
@@ -14,13 +15,13 @@ export default function CartPage() {
 
   return (
     <Container as="main" className="py-10">
-      <h1 className="text-2xl font-bold tracking-tight text-neutral-900 mb-8">
+      <Typography.Title level={3} style={{ margin: "0 0 32px 0" }}>
         Shopping Cart
-      </h1>
+      </Typography.Title>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <ul className="divide-y divide-neutral-200">
+          <ul style={{ listStyle: "none", margin: 0, padding: 0, borderTop: "1px solid #e5e7eb" }}>
             {items.map((item) => (
               <CartItem key={item.product.id} item={item} />
             ))}

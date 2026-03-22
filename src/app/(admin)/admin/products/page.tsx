@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
 import Link from "next/link";
-import { Button } from "@/shared/components/ui/Button";
-import { Package, Plus } from "lucide-react";
+import { Button, Empty, Typography } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 
 export const metadata: Metadata = { title: "Products" };
 
@@ -16,22 +16,24 @@ export default async function AdminProductsPage() {
   const products = await getAdminProducts();
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-neutral-900">Products</h1>
-        <Button asChild size="sm">
-          <Link href="/admin/products/new">
-            <Plus className="h-4 w-4" />
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <Typography.Title level={4} style={{ margin: 0 }}>Products</Typography.Title>
+        <Link href="/admin/products/new">
+          <Button type="primary" size="small" icon={<PlusOutlined />}>
             Add Product
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
 
       {products.length === 0 && (
-        <div className="rounded-lg border border-dashed border-neutral-300 bg-white p-12 text-center">
-          <Package className="mx-auto h-10 w-10 text-neutral-300" />
-          <p className="mt-3 text-sm font-medium text-neutral-900">No products yet</p>
-          <p className="mt-1 text-sm text-neutral-500">Add your first product to get started.</p>
+        <div style={{ borderRadius: 8, border: "2px dashed #d1d5db", background: "#fff", padding: 48, display: "flex", justifyContent: "center" }}>
+          <Empty description={
+            <span>
+              <strong style={{ display: "block", color: "#111827" }}>No products yet</strong>
+              <span style={{ color: "#6b7280" }}>Add your first product to get started.</span>
+            </span>
+          } />
         </div>
       )}
     </div>

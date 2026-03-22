@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
-import { ShoppingBag } from "lucide-react";
+import { Empty, Typography } from "antd";
 
 export const metadata: Metadata = { title: "Orders" };
 
@@ -14,14 +14,17 @@ export default async function AdminOrdersPage() {
   const orders = await getAdminOrders();
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-neutral-900">Orders</h1>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <Typography.Title level={4} style={{ margin: 0 }}>Orders</Typography.Title>
 
       {orders.length === 0 && (
-        <div className="rounded-lg border border-dashed border-neutral-300 bg-white p-12 text-center">
-          <ShoppingBag className="mx-auto h-10 w-10 text-neutral-300" />
-          <p className="mt-3 text-sm font-medium text-neutral-900">No orders yet</p>
-          <p className="mt-1 text-sm text-neutral-500">Orders will appear here once customers start purchasing.</p>
+        <div style={{ borderRadius: 8, border: "2px dashed #d1d5db", background: "#fff", padding: 48, display: "flex", justifyContent: "center" }}>
+          <Empty description={
+            <span>
+              <strong style={{ display: "block", color: "#111827" }}>No orders yet</strong>
+              <span style={{ color: "#6b7280" }}>Orders will appear here once customers start purchasing.</span>
+            </span>
+          } />
         </div>
       )}
     </div>

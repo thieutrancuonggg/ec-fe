@@ -1,23 +1,22 @@
 import Link from "next/link";
-import { Container } from "@/shared/components/layout/Container";
-import { Button } from "@/shared/components/ui/Button";
+import { Result, Button } from "antd";
 
 export default function NotFound() {
   return (
-    <Container className="flex flex-col items-center justify-center py-24 text-center">
-      <p className="text-sm font-semibold uppercase tracking-wide text-blue-600">404</p>
-      <h1 className="mt-2 text-4xl font-bold text-neutral-900">Page not found</h1>
-      <p className="mt-4 text-neutral-500 max-w-md">
-        Sorry, we couldn&apos;t find the page you&apos;re looking for.
-      </p>
-      <div className="mt-8 flex gap-4">
-        <Button asChild>
-          <Link href="/">Go home</Link>
-        </Button>
-        <Button asChild variant="outline">
-          <Link href="/products">Browse products</Link>
-        </Button>
-      </div>
-    </Container>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 8rem)", padding: "48px 16px" }}>
+      <Result
+        status="404"
+        title="Page not found"
+        subTitle="Sorry, we couldn't find the page you're looking for."
+        extra={[
+          <Link key="home" href="/">
+            <Button type="primary">Go home</Button>
+          </Link>,
+          <Link key="products" href="/products">
+            <Button>Browse products</Button>
+          </Link>,
+        ]}
+      />
+    </div>
   );
 }

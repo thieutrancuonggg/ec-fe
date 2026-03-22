@@ -1,3 +1,4 @@
+import { Empty } from "antd";
 import { type Product } from "../types";
 import { ProductCard } from "./ProductCard";
 import { ProductCardSkeleton } from "./ProductCardSkeleton";
@@ -23,11 +24,15 @@ export function ProductGrid({ products, loading = false, skeletonCount = 8 }: Pr
 
   if (products.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-24 text-center">
-        <p className="text-2xl font-semibold text-neutral-900">No products found</p>
-        <p className="mt-2 text-sm text-neutral-500">
-          Try adjusting your search or filter to find what you&apos;re looking for.
-        </p>
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "96px 0" }}>
+        <Empty
+          description={
+            <span>
+              <strong style={{ display: "block", fontSize: 16, color: "#111827" }}>No products found</strong>
+              <span style={{ color: "#6b7280", fontSize: 14 }}>Try adjusting your search or filter to find what you&apos;re looking for.</span>
+            </span>
+          }
+        />
       </div>
     );
   }

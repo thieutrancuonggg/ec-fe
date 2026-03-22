@@ -1,6 +1,5 @@
-import dayjs from "dayjs";
+"use client";
 
-export async function CopyrightYear() {
-  "use cache";
-  return <>{dayjs().year()}</>;
+export function CopyrightYear() {
+  return <>{new Date().getFullYear()}</>;
 }

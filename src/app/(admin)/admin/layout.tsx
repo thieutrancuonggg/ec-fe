@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Layout } from "antd";
 import { AdminSidebar } from "@/modules/admin/components/AdminSidebar";
 import { AdminHeader } from "@/modules/admin/components/AdminHeader";
 
@@ -16,12 +17,14 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex h-screen overflow-hidden bg-neutral-50">
+    <Layout style={{ minHeight: "100vh" }}>
       <AdminSidebar />
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <Layout>
         <AdminHeader />
-        <main className="flex-1 overflow-y-auto p-6">{children}</main>
-      </div>
-    </div>
+        <Layout.Content style={{ padding: 24, overflow: "auto", background: "#f9fafb" }}>
+          {children}
+        </Layout.Content>
+      </Layout>
+    </Layout>
   );
 }

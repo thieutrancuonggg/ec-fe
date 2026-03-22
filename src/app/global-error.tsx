@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "antd";
 
 interface GlobalErrorProps {
   error: Error & { digest?: string };
@@ -15,15 +15,15 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
 
   return (
     <html lang="en">
-      <body className="flex min-h-screen flex-col items-center justify-center p-8 text-center font-sans">
-        <h1 className="text-3xl font-bold">Something went wrong</h1>
-        <p className="mt-2 text-neutral-500 max-w-md">
+      <body style={{ display: "flex", minHeight: "100vh", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 32, textAlign: "center", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+        <h1 style={{ fontSize: 28, fontWeight: 700, margin: "0 0 8px" }}>Something went wrong</h1>
+        <p style={{ color: "#6b7280", maxWidth: 448, margin: "0 0 4px" }}>
           A critical error occurred. Please refresh the page or contact support.
         </p>
         {error.digest && (
-          <p className="mt-1 text-xs text-neutral-400">Error ID: {error.digest}</p>
+          <p style={{ fontSize: 12, color: "#9ca3af", margin: "0 0 24px" }}>Error ID: {error.digest}</p>
         )}
-        <Button onClick={reset} className="mt-6">
+        <Button type="primary" onClick={reset} style={{ marginTop: 24 }}>
           Refresh
         </Button>
       </body>

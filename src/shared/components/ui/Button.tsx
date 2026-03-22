@@ -1,71 +1,71 @@
-import { cn } from "@/shared/lib/cn";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import { type ButtonHTMLAttributes, forwardRef } from "react";
+"use client";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-  {
-    variants: {
-      variant: {
-        default:
-          "bg-blue-600 text-white hover:bg-blue-700 focus-visible:ring-blue-600",
-        cta:
-          "bg-orange-500 text-white hover:bg-orange-600 focus-visible:ring-orange-500 font-semibold shadow-sm hover:shadow-orange-200/60 hover:shadow-md",
-        destructive:
-          "bg-red-500 text-white hover:bg-red-600 focus-visible:ring-red-500",
-        outline:
-          "border border-blue-200 bg-white hover:bg-blue-50 hover:text-blue-700 text-blue-600 focus-visible:ring-blue-600",
-        secondary:
-          "bg-neutral-100 text-neutral-900 hover:bg-neutral-200 focus-visible:ring-blue-600",
-        ghost:
-          "hover:bg-neutral-100 hover:text-neutral-900 focus-visible:ring-blue-600",
-        link: "text-blue-600 underline-offset-4 hover:underline hover:text-blue-700",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-8 rounded-md px-3 text-xs",
-        lg: "h-12 rounded-md px-8 text-base",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-);
+import AntButton, { type ButtonProps as AntButtonProps } from "antd/es/button";
+import type { ReactNode, CSSProperties } from "react";
 
-export interface ButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  loading?: boolean;
+export interface ButtonProps extends Omit<AntButtonProps, "type"> {
+  variant?: "default" | "cta" | "outline" | "secondary" | "ghost" | "link" | "destructive";
   asChild?: boolean;
+  size?: "default" | "sm" | "lg" | "icon" | "small" | "middle" | "large";
+  children?: ReactNode;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, loading, disabled, asChild = false, children, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
-        ref={ref}
-        disabled={disabled ?? loading}
-        aria-busy={loading}
-        {...props}
-      >
-        {asChild ? children : (
-          <>
-            {loading && (
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-            )}
-            {children}
-          </>
-        )}
-      </Comp>
-    );
+function getAntProps(variant: ButtonProps["variant"]): { type?: AntButtonProps["type"]; danger?: boolean; style?: CSSProperties } {
+  switch (variant) {
+    case "cta":
+      return { type: "primary", style: { backgroundColor: "#F97316", borderColor: "#F97316" } };
+    case "outline":
+      return { type: "default" };
+    case "secondary":
+      return { type: "default" };
+    case "ghost":
+      return { type: "text" };
+    case "link":
+      return { type: "link" };
+    case "destructive":
+      return { type: "primary", danger: true };
+    default:
+      return { type: "primary" };
   }
-);
-Button.displayName = "Button";
+}
 
-export { Button, buttonVariants };
+function getAntSize(size: ButtonProps["size"]): AntButtonProps["size"] {
+  if (size === "sm" || size === "small") return "small";
+  if (size === "lg" || size === "large") return "large";
+  return "middle";
+}
+
+export function Button({
+  variant = "default",
+  asChild,
+  size,
+  className,
+  style,
+  children,
+  disabled,
+  loading,
+  onClick,
+  type,
+  ...props
+}: ButtonProps) {
+  const { type: antType, danger, style: variantStyle } = getAntProps(variant);
+
+  return (
+    <AntButton
+      type={antType}
+      danger={danger}
+      size={getAntSize(size)}
+      className={className}
+      style={{ ...variantStyle, ...style }}
+      disabled={disabled}
+      loading={loading}
+      onClick={onClick}
+      htmlType={type as AntButtonProps["htmlType"]}
+      {...props}
+    >
+      {children}
+    </AntButton>
+  );
+}
+
+export { Button as default };

@@ -2,87 +2,92 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Layout, Menu, Button } from "antd";
 import {
-  LayoutDashboard,
-  Package,
-  ShoppingBag,
-  Users,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
-import { cn } from "@/shared/lib/cn";
+  DashboardOutlined,
+  ShoppingOutlined,
+  ShoppingCartOutlined,
+  TeamOutlined,
+  SettingOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+} from "@ant-design/icons";
 import { siteConfig } from "@/config/site";
 import { useAdminStore } from "../store/adminStore";
 
 const navItems = [
-  { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/products", label: "Products", icon: Package },
-  { href: "/admin/orders", label: "Orders", icon: ShoppingBag },
-  { href: "/admin/users", label: "Users", icon: Users },
-  { href: "/admin/settings", label: "Settings", icon: Settings },
+  { href: "/admin/dashboard", label: "Dashboard", icon: <DashboardOutlined /> },
+  { href: "/admin/products", label: "Products", icon: <ShoppingOutlined /> },
+  { href: "/admin/orders", label: "Orders", icon: <ShoppingCartOutlined /> },
+  { href: "/admin/users", label: "Users", icon: <TeamOutlined /> },
+  { href: "/admin/settings", label: "Settings", icon: <SettingOutlined /> },
 ];
 
 export function AdminSidebar() {
   const pathname = usePathname();
   const { sidebarCollapsed, toggleSidebar } = useAdminStore();
 
+  const selectedKey = navItems.find((item) => pathname.startsWith(item.href))?.href ?? "";
+
+  const menuItems = navItems.map(({ href, label, icon }) => ({
+    key: href,
+    icon,
+    label: <Link href={href}>{label}</Link>,
+  }));
+
   return (
-    <aside
-      className={cn(
-        "relative flex flex-col border-r border-neutral-200 bg-neutral-900 text-white transition-all duration-200",
-        sidebarCollapsed ? "w-16" : "w-60"
-      )}
+    <Layout.Sider
+      collapsed={sidebarCollapsed}
+      theme="dark"
+      style={{ position: "relative", background: "#0f172a" }}
+      width={240}
+      collapsedWidth={64}
     >
       {/* Logo */}
-      <div className="flex h-16 items-center border-b border-neutral-700 px-4">
-        {!sidebarCollapsed && (
-          <Link href="/admin/dashboard" className="text-base font-bold tracking-tight truncate">
-            {siteConfig.name} <span className="text-neutral-400 text-xs font-normal">Admin</span>
-          </Link>
-        )}
-        {sidebarCollapsed && (
-          <Link href="/admin/dashboard" className="mx-auto text-base font-bold">
-            {siteConfig.name.charAt(0)}
-          </Link>
-        )}
+      <div style={{ height: 64, display: "flex", alignItems: "center", borderBottom: "1px solid #1e293b", padding: sidebarCollapsed ? "0 16px" : "0 20px", overflow: "hidden" }}>
+        <Link href="/admin/dashboard" style={{ color: "#fff", textDecoration: "none", fontWeight: 700, fontSize: 15, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          {sidebarCollapsed ? siteConfig.name.charAt(0) : (
+            <>
+              {siteConfig.name}{" "}
+              <span style={{ color: "#94a3b8", fontSize: 12, fontWeight: 400 }}>Admin</span>
+            </>
+          )}
+        </Link>
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 space-y-1 px-2 py-4">
-        {navItems.map(({ href, label, icon: Icon }) => {
-          const active = pathname.startsWith(href);
-          return (
-            <Link
-              key={href}
-              href={href}
-              className={cn(
-                "flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                active
-                  ? "bg-blue-500/25 text-white"
-                  : "text-slate-400 hover:bg-white/5 hover:text-white"
-              )}
-              title={sidebarCollapsed ? label : undefined}
-            >
-              <Icon className="h-5 w-5 flex-shrink-0" />
-              {!sidebarCollapsed && <span>{label}</span>}
-            </Link>
-          );
-        })}
-      </nav>
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[selectedKey]}
+        items={menuItems}
+        style={{ background: "#0f172a", borderRight: "none", flex: 1 }}
+      />
 
       {/* Collapse toggle */}
-      <button
+      <Button
+        type="text"
+        icon={sidebarCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         onClick={toggleSidebar}
-        className="absolute -right-3 top-20 flex h-6 w-6 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-600 shadow-sm hover:bg-neutral-50"
         aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-      >
-        {sidebarCollapsed ? (
-          <ChevronRight className="h-3 w-3" />
-        ) : (
-          <ChevronLeft className="h-3 w-3" />
-        )}
-      </button>
-    </aside>
+        style={{
+          position: "absolute",
+          right: -16,
+          top: 80,
+          width: 32,
+          height: 32,
+          borderRadius: "50%",
+          border: "1px solid #e5e7eb",
+          background: "#fff",
+          color: "#6b7280",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 0,
+          zIndex: 10,
+        }}
+      />
+    </Layout.Sider>
   );
 }

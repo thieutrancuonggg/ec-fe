@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Container } from "@/shared/components/layout/Container";
-import { Button } from "@/shared/components/ui/Button";
+import { Result, Button } from "antd";
 
 interface ProductsErrorProps {
   error: Error & { digest?: string };
@@ -15,14 +14,17 @@ export default function ProductsError({ error, reset }: ProductsErrorProps) {
   }, [error]);
 
   return (
-    <Container className="flex flex-col items-center justify-center py-24 text-center">
-      <h1 className="text-2xl font-bold text-neutral-900">Failed to load products</h1>
-      <p className="mt-2 text-neutral-500">
-        We couldn&apos;t load the products. Please try again.
-      </p>
-      <Button onClick={reset} className="mt-6">
-        Try again
-      </Button>
-    </Container>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 8rem)", padding: "48px 16px" }}>
+      <Result
+        status="error"
+        title="Failed to load products"
+        subTitle="We couldn't load the products. Please try again."
+        extra={[
+          <Button key="retry" type="primary" onClick={reset}>
+            Try again
+          </Button>,
+        ]}
+      />
+    </div>
   );
 }

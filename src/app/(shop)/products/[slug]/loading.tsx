@@ -1,24 +1,24 @@
 import { Container } from "@/shared/components/layout/Container";
-import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { Skeleton } from "antd";
 
 export default function ProductDetailLoading() {
   return (
     <Container className="py-10">
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-        <Skeleton className="aspect-square w-full rounded-xl" />
-        <div className="flex flex-col gap-6">
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-24" />
-            <Skeleton className="h-8 w-3/4" />
-            <Skeleton className="h-4 w-32" />
+        <Skeleton.Image active style={{ width: "100%", height: 400, borderRadius: 12 }} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <Skeleton.Input active style={{ width: 96, height: 16 }} />
+            <Skeleton.Input active style={{ width: "75%", height: 32 }} />
+            <Skeleton.Input active style={{ width: 128, height: 16 }} />
           </div>
-          <Skeleton className="h-10 w-40" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-3/4" />
+          <Skeleton.Input active style={{ width: 160, height: 40 }} />
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            <Skeleton.Input active block style={{ height: 16 }} />
+            <Skeleton.Input active block style={{ height: 16 }} />
+            <Skeleton.Input active style={{ width: "75%", height: 16 }} />
           </div>
-          <Skeleton className="h-12 w-full rounded-md" />
+          <Skeleton.Button active block style={{ height: 48 }} />
         </div>
       </div>
     </Container>

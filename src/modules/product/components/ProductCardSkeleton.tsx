@@ -1,15 +1,9 @@
-import { Skeleton } from "@/shared/components/ui/Skeleton";
+import { Card, Skeleton } from "antd";
 
 export function ProductCardSkeleton() {
   return (
-    <div className="flex flex-col overflow-hidden rounded-lg border border-neutral-200 bg-white">
-      <Skeleton className="aspect-square w-full" />
-      <div className="flex flex-col gap-2 p-4">
-        <Skeleton className="h-4 w-3/4" />
-        <Skeleton className="h-3 w-1/3" />
-        <Skeleton className="h-5 w-1/2" />
-        <Skeleton className="h-3 w-1/4" />
-      </div>
-    </div>
+    <Card styles={{ body: { padding: 16 } }} cover={<Skeleton.Image active style={{ width: "100%", height: 200 }} />}>
+      <Skeleton active paragraph={{ rows: 3 }} title={false} />
+    </Card>
   );
 }

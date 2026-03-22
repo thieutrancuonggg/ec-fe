@@ -1,17 +1,14 @@
-import { cn } from "@/shared/lib/cn";
+import { Skeleton as AntSkeleton } from "antd";
 
 interface SkeletonProps {
   className?: string;
+  style?: React.CSSProperties;
 }
 
-export function Skeleton({ className }: SkeletonProps) {
+export function Skeleton({ className, style }: SkeletonProps) {
   return (
-    <div
-      className={cn(
-        "animate-pulse rounded-md bg-neutral-200",
-        className
-      )}
-      aria-hidden="true"
-    />
+    <div className={className} style={{ ...style, overflow: "hidden" }}>
+      <AntSkeleton.Input active block style={{ height: "100%", minHeight: 20, ...style }} />
+    </div>
   );
 }

@@ -1,18 +1,20 @@
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
-import { Button } from "@/shared/components/ui/Button";
+import { Button, Typography } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 
 export function CartEmpty() {
   return (
-    <div className="flex flex-col items-center justify-center py-24 text-center">
-      <ShoppingCart className="h-16 w-16 text-neutral-300" />
-      <h2 className="mt-4 text-xl font-semibold text-neutral-900">Your cart is empty</h2>
-      <p className="mt-2 text-sm text-neutral-500">
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "96px 0", textAlign: "center" }}>
+      <ShoppingCartOutlined style={{ fontSize: 64, color: "#d1d5db" }} />
+      <Typography.Title level={4} style={{ marginTop: 16 }}>Your cart is empty</Typography.Title>
+      <Typography.Text type="secondary" style={{ marginTop: 8, display: "block" }}>
         Looks like you haven&apos;t added anything to your cart yet.
-      </p>
-      <Button asChild className="mt-6">
-        <Link href="/products">Start Shopping</Link>
-      </Button>
+      </Typography.Text>
+      <Link href="/products">
+        <Button type="primary" size="large" style={{ marginTop: 24 }}>
+          Start Shopping
+        </Button>
+      </Link>
     </div>
   );
 }

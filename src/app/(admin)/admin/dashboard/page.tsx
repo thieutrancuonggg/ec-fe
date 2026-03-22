@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
-import { Container } from "@/shared/components/layout/Container";
+import { Typography } from "antd";
 import { AdminStatCard } from "@/modules/admin/components/AdminStatCard";
 import { ShoppingBag, Users, Package, TrendingUp } from "lucide-react";
 
@@ -17,8 +17,8 @@ export default async function AdminDashboardPage() {
   const stats = await getStats();
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-neutral-900">Dashboard</h1>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <Typography.Title level={4} style={{ margin: 0 }}>Dashboard</Typography.Title>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <AdminStatCard

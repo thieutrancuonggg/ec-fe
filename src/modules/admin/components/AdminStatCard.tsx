@@ -1,5 +1,5 @@
+import { Card, Statistic } from "antd";
 import { type LucideIcon } from "lucide-react";
-import { cn } from "@/shared/lib/cn";
 
 interface AdminStatCardProps {
   title: string;
@@ -17,20 +17,15 @@ export function AdminStatCard({
   className,
 }: AdminStatCardProps) {
   return (
-    <div
-      className={cn(
-        "rounded-lg border border-neutral-200 bg-white p-5 space-y-3",
-        className
-      )}
-    >
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-medium text-neutral-500">{title}</p>
-        <div className="rounded-md bg-blue-50 p-2">
-          <Icon className="h-4 w-4 text-blue-600" />
+    <Card className={className} style={{ borderRadius: 8 }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
+        <span style={{ fontSize: 14, fontWeight: 500, color: "#6b7280" }}>{title}</span>
+        <div style={{ borderRadius: 8, background: "#eff6ff", padding: 8, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Icon size={16} style={{ color: "#2563EB" }} />
         </div>
       </div>
-      <p className="text-2xl font-bold text-neutral-900">{value}</p>
-      {trend && <p className="text-xs text-neutral-400">{trend}</p>}
-    </div>
+      <Statistic value={value} valueStyle={{ fontSize: 24, fontWeight: 700, color: "#111827" }} />
+      {trend && <p style={{ marginTop: 8, fontSize: 12, color: "#9ca3af" }}>{trend}</p>}
+    </Card>
   );
 }

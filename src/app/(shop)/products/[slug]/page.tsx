@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import { Rate, Tag, Typography } from "antd";
 import { Container } from "@/shared/components/layout/Container";
 import { Badge } from "@/shared/components/ui/Badge";
 import { formatPrice } from "@/shared/lib/utils";
@@ -71,41 +72,51 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
       <Container as="main" className="py-10">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-          <div className="relative aspect-square overflow-hidden rounded-xl bg-neutral-50">
+          <div style={{ position: "relative", aspectRatio: "1/1", overflow: "hidden", borderRadius: 12, background: "#f9fafb" }}>
             {thumbnail ? (
-              <Image src={thumbnail.url} alt={thumbnail.alt} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" priority />
+              <Image src={thumbnail.url} alt={thumbnail.alt} fill sizes="(max-width: 1024px) 100vw, 50vw" style={{ objectFit: "cover" }} priority />
             ) : (
-              <div className="flex h-full items-center justify-center text-neutral-300 text-sm">No image</div>
+              <div style={{ display: "flex", height: "100%", alignItems: "center", justifyContent: "center", color: "#d1d5db", fontSize: 14 }}>No image</div>
             )}
-            {isOnSale && <div className="absolute left-4 top-4"><Badge variant="destructive">Sale</Badge></div>}
+            {isOnSale && (
+              <div style={{ position: "absolute", left: 16, top: 16 }}>
+                <Badge variant="destructive">Sale</Badge>
+              </div>
+            )}
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
             <div>
-              <p className="text-sm text-neutral-500">{product.category.name}</p>
-              <h1 className="mt-1 text-3xl font-bold tracking-tight text-neutral-900">{product.name}</h1>
+              <Typography.Text type="secondary" style={{ fontSize: 14 }}>{product.category.name}</Typography.Text>
+              <Typography.Title level={2} style={{ margin: "4px 0 0", fontSize: 30, letterSpacing: "-0.025em" }}>{product.name}</Typography.Title>
               {product.rating > 0 && (
-                <div className="mt-2 flex items-center gap-2">
-                  <span className="text-amber-400" aria-hidden="true">{"★".repeat(Math.round(product.rating))}{"☆".repeat(5 - Math.round(product.rating))}</span>
-                  <span className="text-sm text-neutral-500">{product.rating.toFixed(1)} ({product.reviewCount} reviews)</span>
+                <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8 }}>
+                  <Rate disabled defaultValue={product.rating} style={{ fontSize: 14 }} />
+                  <Typography.Text type="secondary" style={{ fontSize: 14 }}>
+                    {product.rating.toFixed(1)} ({product.reviewCount} reviews)
+                  </Typography.Text>
                 </div>
               )}
             </div>
 
-            <div className="flex items-baseline gap-3">
-              <span className="text-3xl font-bold text-neutral-900">{formatPrice(product.price)}</span>
-              {isOnSale && <span className="text-xl text-neutral-400 line-through">{formatPrice(product.compareAtPrice!)}</span>}
+            <div style={{ display: "flex", alignItems: "baseline", gap: 12 }}>
+              <Typography.Title level={3} style={{ margin: 0, fontSize: 30, color: "#111827" }}>{formatPrice(product.price)}</Typography.Title>
+              {isOnSale && (
+                <Typography.Text delete type="secondary" style={{ fontSize: 20 }}>{formatPrice(product.compareAtPrice!)}</Typography.Text>
+              )}
             </div>
 
-            <p className="text-neutral-600 leading-relaxed">{product.description}</p>
+            <Typography.Paragraph style={{ color: "#4b5563", lineHeight: 1.7, margin: 0 }}>{product.description}</Typography.Paragraph>
 
-            {!product.inStock && <Badge variant="secondary" className="w-fit">Out of stock</Badge>}
+            {!product.inStock && <Badge variant="secondary">Out of stock</Badge>}
 
             <AddToCartButton product={product} />
 
             {product.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {product.tags.map((tag) => <Badge key={tag} variant="outline">{tag}</Badge>)}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                {product.tags.map((tag) => (
+                  <Tag key={tag} color="geekblue">{tag}</Tag>
+                ))}
               </div>
             )}
           </div>

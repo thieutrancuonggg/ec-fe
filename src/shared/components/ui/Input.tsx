@@ -1,48 +1,36 @@
-import { cn } from "@/shared/lib/cn";
-import { type InputHTMLAttributes, forwardRef } from "react";
+"use client";
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+import { Input as AntInput } from "antd";
+import type { InputProps as AntInputProps } from "antd";
+import type { CSSProperties } from "react";
+
+export interface InputProps extends Omit<AntInputProps, "size"> {
   label?: string;
   error?: string;
+  id?: string;
+  style?: CSSProperties;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type = "text", label, error, id, ...props }, ref) => {
-    return (
-      <div className="flex flex-col gap-1.5">
-        {label && (
-          <label
-            htmlFor={id}
-            className="text-sm font-medium text-neutral-700"
-          >
-            {label}
-          </label>
-        )}
-        <input
-          id={id}
-          type={type}
-          className={cn(
-            "flex h-10 w-full rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm",
-            "placeholder:text-neutral-400",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2",
-            "disabled:cursor-not-allowed disabled:opacity-50",
-            error && "border-red-500 focus-visible:ring-red-500",
-            className
-          )}
-          ref={ref}
-          aria-invalid={!!error}
-          aria-describedby={error ? `${id}-error` : undefined}
-          {...props}
-        />
-        {error && (
-          <p id={`${id}-error`} className="text-xs text-red-500">
-            {error}
-          </p>
-        )}
-      </div>
-    );
-  }
-);
-Input.displayName = "Input";
-
-export { Input };
+export function Input({ label, error, id, className, style, ...props }: InputProps) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+      {label && (
+        <label htmlFor={id} style={{ fontSize: 14, fontWeight: 500, color: "#374151" }}>
+          {label}
+        </label>
+      )}
+      <AntInput
+        id={id}
+        status={error ? "error" : undefined}
+        className={className}
+        style={style}
+        {...props}
+      />
+      {error && (
+        <p id={`${id}-error`} style={{ fontSize: 12, color: "#EF4444", margin: 0 }}>
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}

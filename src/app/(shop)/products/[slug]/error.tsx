@@ -2,8 +2,7 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { Container } from "@/shared/components/layout/Container";
-import { Button } from "@/shared/components/ui/Button";
+import { Result, Button } from "antd";
 
 interface ProductErrorProps {
   error: Error & { digest?: string };
@@ -16,17 +15,20 @@ export default function ProductDetailError({ error, reset }: ProductErrorProps) 
   }, [error]);
 
   return (
-    <Container className="flex flex-col items-center justify-center py-24 text-center">
-      <h1 className="text-2xl font-bold text-neutral-900">Failed to load product</h1>
-      <p className="mt-2 text-neutral-500">
-        We couldn&apos;t load this product. Please try again.
-      </p>
-      <div className="mt-6 flex gap-4">
-        <Button onClick={reset}>Try again</Button>
-        <Button asChild variant="outline">
-          <Link href="/products">Back to Products</Link>
-        </Button>
-      </div>
-    </Container>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 8rem)", padding: "48px 16px" }}>
+      <Result
+        status="error"
+        title="Failed to load product"
+        subTitle="We couldn't load this product. Please try again."
+        extra={[
+          <Button key="retry" type="primary" onClick={reset}>
+            Try again
+          </Button>,
+          <Link key="back" href="/products">
+            <Button>Back to Products</Button>
+          </Link>,
+        ]}
+      />
+    </div>
   );
 }

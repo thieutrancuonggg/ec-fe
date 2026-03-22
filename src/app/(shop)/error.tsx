@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Container } from "@/shared/components/layout/Container";
-import { Button } from "@/shared/components/ui/Button";
+import { Result, Button } from "antd";
 
 interface ErrorPageProps {
   error: Error & { digest?: string };
@@ -15,17 +14,24 @@ export default function RootError({ error, reset }: ErrorPageProps) {
   }, [error]);
 
   return (
-    <Container className="flex flex-col items-center justify-center py-24 text-center">
-      <h1 className="text-3xl font-bold text-neutral-900">Something went wrong</h1>
-      <p className="mt-2 text-neutral-500 max-w-md">
-        An unexpected error occurred. Please try again.
-      </p>
-      {error.digest && (
-        <p className="mt-1 text-xs text-neutral-400">Error ID: {error.digest}</p>
-      )}
-      <Button onClick={reset} className="mt-6">
-        Try again
-      </Button>
-    </Container>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 8rem)", padding: "48px 16px" }}>
+      <Result
+        status="error"
+        title="Something went wrong"
+        subTitle={
+          <>
+            An unexpected error occurred. Please try again.
+            {error.digest && (
+              <div style={{ marginTop: 4, fontSize: 12, color: "#9ca3af" }}>Error ID: {error.digest}</div>
+            )}
+          </>
+        }
+        extra={[
+          <Button key="retry" type="primary" onClick={reset}>
+            Try again
+          </Button>,
+        ]}
+      />
+    </div>
   );
 }

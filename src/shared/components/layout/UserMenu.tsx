@@ -1,42 +1,24 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import { User, LogOut, ChevronDown } from "lucide-react";
+import { Avatar, Button, Dropdown, Space, Typography } from "antd";
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { useAuth } from "@/modules/auth/hooks/useAuth";
-import { cn } from "@/shared/lib/cn";
+import type { MenuProps } from "antd";
 
 export function UserMenu() {
   const { user, isAuthenticated, logout, logoutLoading } = useAuth();
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   if (!isAuthenticated) {
     return (
-      <div className="hidden sm:flex items-center gap-2">
-        <Link
-          href="/login"
-          className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors px-2 py-1"
-        >
-          Sign in
-        </Link>
-        <Link
-          href="/register"
-          className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors px-3 py-1.5 rounded-md"
-        >
-          Register
-        </Link>
-      </div>
+      <Space className="hidden sm:flex">
+        <Button type="text" size="small">
+          <Link href="/login" style={{ color: "inherit", textDecoration: "none" }}>Sign in</Link>
+        </Button>
+        <Button type="primary" size="small">
+          <Link href="/register" style={{ color: "#fff", textDecoration: "none" }}>Register</Link>
+        </Button>
+      </Space>
     );
   }
 
@@ -45,68 +27,49 @@ export function UserMenu() {
     .map((n) => n![0].toUpperCase())
     .join("") || "U";
 
-  return (
-    <div className="relative" ref={menuRef}>
-      <button
-        onClick={() => setOpen((v) => !v)}
-        className={cn(
-          "flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium transition-colors",
-          open
-            ? "bg-blue-50 text-blue-700"
-            : "text-slate-700 hover:bg-neutral-100 hover:text-neutral-900"
-        )}
-        aria-expanded={open}
-        aria-haspopup="true"
-      >
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
-          {initials}
-        </span>
-        <span className="hidden sm:block max-w-[120px] truncate">
-          {user?.firstName}
-        </span>
-        <ChevronDown
-          className={cn(
-            "h-3.5 w-3.5 text-slate-400 transition-transform duration-200",
-            open && "rotate-180"
-          )}
-        />
-      </button>
-
-      {open && (
-        <div className="absolute right-0 top-full mt-1.5 w-52 rounded-xl border border-neutral-200 bg-white shadow-lg shadow-neutral-200/60 py-1 z-50">
-          <div className="px-3 py-2.5 border-b border-neutral-100">
-            <p className="text-sm font-semibold text-neutral-900 truncate">
-              {user?.firstName} {user?.lastName}
-            </p>
-            <p className="text-xs text-neutral-500 truncate mt-0.5">{user?.email}</p>
-          </div>
-
-          <div className="py-1">
-            <Link
-              href="/account"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 px-3 py-2 text-sm text-neutral-700 hover:bg-blue-50 hover:text-blue-700 transition-colors"
-            >
-              <User className="h-4 w-4" />
-              My Account
-            </Link>
-          </div>
-
-          <div className="border-t border-neutral-100 py-1">
-            <button
-              onClick={() => {
-                setOpen(false);
-                logout();
-              }}
-              disabled={logoutLoading}
-              className="flex w-full items-center gap-2.5 px-3 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors disabled:opacity-50"
-            >
-              <LogOut className="h-4 w-4" />
-              {logoutLoading ? "Signing out…" : "Sign out"}
-            </button>
-          </div>
+  const items: MenuProps["items"] = [
+    {
+      key: "profile",
+      type: "group",
+      label: (
+        <div>
+          <Typography.Text strong style={{ display: "block" }}>
+            {user?.firstName} {user?.lastName}
+          </Typography.Text>
+          <Typography.Text type="secondary" style={{ fontSize: 12 }}>
+            {user?.email}
+          </Typography.Text>
         </div>
-      )}
-    </div>
+      ),
+    },
+    { type: "divider" },
+    {
+      key: "account",
+      icon: <UserOutlined />,
+      label: <Link href="/account" style={{ textDecoration: "none" }}>My Account</Link>,
+    },
+    { type: "divider" },
+    {
+      key: "logout",
+      icon: <LogoutOutlined />,
+      label: logoutLoading ? "Signing out…" : "Sign out",
+      danger: true,
+      onClick: logout,
+    },
+  ];
+
+  return (
+    <Dropdown menu={{ items }} trigger={["click"]} placement="bottomRight">
+      <Button type="text" style={{ padding: "4px 8px", height: "auto" }}>
+        <Space size={6}>
+          <Avatar size={28} style={{ backgroundColor: "#2563EB", fontSize: 12, fontWeight: 700 }}>
+            {initials}
+          </Avatar>
+          <span className="hidden sm:inline" style={{ fontSize: 14, fontWeight: 500, color: "#374151", maxWidth: 120, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+            {user?.firstName}
+          </span>
+        </Space>
+      </Button>
+    </Dropdown>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { ShoppingCart } from "lucide-react";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useCart } from "../hooks/useCart";
 import { type Product } from "@/modules/product/types";
 
@@ -14,14 +14,14 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
 
   return (
     <Button
-      variant="cta"
-      size="lg"
-      className="w-full"
+      size="large"
+      block
       disabled={!product.inStock}
       onClick={() => addItem(product, 1)}
       aria-label={`Add ${product.name} to cart`}
+      icon={<ShoppingCartOutlined />}
+      style={product.inStock ? { backgroundColor: "#F97316", borderColor: "#F97316", color: "#fff" } : undefined}
     >
-      <ShoppingCart className="h-5 w-5" />
       {product.inStock ? "Add to Cart" : "Out of Stock"}
     </Button>
   );

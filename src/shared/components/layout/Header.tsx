@@ -15,49 +15,41 @@ const navLinks = [
 export function Header() {
   return (
     <>
-      {/* Announcement bar */}
-      <div className="bg-blue-600 py-2 text-center text-xs font-medium text-white tracking-wide">
-        Free shipping on orders over $50 &middot;{" "}
-        <Link href="/products?sale=true" className="underline underline-offset-2 hover:no-underline transition-all">
+      <div style={{ background: "#2563EB", padding: "8px 0", textAlign: "center", fontSize: 12, fontWeight: 500, color: "#fff", letterSpacing: "0.05em" }}>
+        Free shipping on orders over $50 ·{" "}
+        <Link href="/products?sale=true" style={{ color: "#fff", textDecoration: "underline" }}>
           Shop the sale
         </Link>
       </div>
 
-      {/* Main header */}
-      <header className="sticky top-0 z-40 w-full border-b border-neutral-200/80 bg-white/95 backdrop-blur-md supports-[backdrop-filter]:bg-white/80 shadow-sm">
+      <header style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 40,
+        background: "rgba(255,255,255,0.97)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid #e5e7eb",
+        boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+        height: 64,
+      }}>
         <Container>
-          <div className="flex h-16 items-center gap-4">
-            {/* Mobile menu */}
+          <div style={{ display: "flex", alignItems: "center", height: 64, gap: 16 }}>
             <MobileMenuButton />
-
-            {/* Logo */}
-            <Link
-              href="/"
-              className="flex-shrink-0 text-xl font-bold tracking-tight text-blue-600 hover:text-blue-700 transition-colors"
-            >
+            <Link href="/" style={{ flexShrink: 0, fontSize: 20, fontWeight: 700, letterSpacing: "-0.025em", color: "#2563EB", textDecoration: "none" }}>
               {siteConfig.name}
             </Link>
-
-            {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-1 ml-6">
+            <nav className="hidden md:flex" style={{ display: "flex", alignItems: "center", gap: 4, marginLeft: 24 }}>
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="relative px-3 py-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors rounded-md hover:bg-blue-50 group"
-                >
+                <Link key={link.href} href={link.href} className="header-nav-link" style={{ fontSize: 14, fontWeight: 500, color: "#475569", textDecoration: "none", padding: "6px 12px", borderRadius: 6, transition: "color 0.2s" }}>
                   {link.label}
-                  <span className="absolute inset-x-3 -bottom-px h-px bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-200" />
                 </Link>
               ))}
             </nav>
-
-            {/* Right actions */}
-            <div className="flex items-center gap-2 ml-auto">
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: "auto" }}>
               <SearchBar />
-              <div className="h-6 w-px bg-neutral-200 hidden sm:block" />
+              <div style={{ width: 1, height: 24, background: "#e5e7eb" }} className="hidden sm:block" />
               <UserMenu />
-              <div className="h-6 w-px bg-neutral-200 hidden sm:block" />
+              <div style={{ width: 1, height: 24, background: "#e5e7eb" }} className="hidden sm:block" />
               <CartHeaderButton />
             </div>
           </div>

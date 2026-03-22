@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Minus, Plus, Trash2 } from "lucide-react";
-import { Button } from "@/shared/components/ui/Button";
+import { Button } from "antd";
+import { MinusOutlined, PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import { formatPrice } from "@/shared/lib/utils";
 import { useCart } from "../hooks/useCart";
 import { type CartItem as CartItemType } from "../types";
@@ -16,61 +16,59 @@ export function CartItem({ item }: CartItemProps) {
   const thumbnail = item.product.images[0];
 
   return (
-    <li className="flex gap-4 py-4">
-      <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border border-neutral-200">
+    <li style={{ display: "flex", gap: 16, padding: "16px 0" }}>
+      <div style={{ position: "relative", height: 80, width: 80, flexShrink: 0, overflow: "hidden", borderRadius: 8, border: "1px solid #e5e7eb" }}>
         {thumbnail ? (
           <Image
             src={thumbnail.url}
             alt={thumbnail.alt}
             fill
             sizes="80px"
-            className="object-cover"
+            style={{ objectFit: "cover" }}
           />
         ) : (
-          <div className="h-full w-full bg-neutral-100" />
+          <div style={{ height: "100%", width: "100%", background: "#f3f4f6" }} />
         )}
       </div>
 
-      <div className="flex flex-1 flex-col gap-1">
-        <div className="flex items-start justify-between gap-2">
-          <p className="text-sm font-medium text-neutral-900 line-clamp-2">
+      <div style={{ display: "flex", flex: 1, flexDirection: "column", gap: 4 }}>
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
+          <p style={{ fontSize: 14, fontWeight: 500, color: "#111827", margin: 0, overflow: "hidden", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
             {item.product.name}
           </p>
           <Button
-            variant="ghost"
-            size="icon"
-            className="h-7 w-7 flex-shrink-0 text-neutral-400 hover:text-red-500"
+            type="text"
+            size="small"
+            icon={<DeleteOutlined />}
             onClick={() => removeItem(item.product.id)}
             aria-label={`Remove ${item.product.name}`}
-          >
-            <Trash2 className="h-4 w-4" />
-          </Button>
+            style={{ color: "#9ca3af", flexShrink: 0 }}
+            danger
+          />
         </div>
 
-        <p className="text-sm font-semibold text-neutral-900">
+        <p style={{ fontSize: 14, fontWeight: 600, color: "#111827", margin: 0 }}>
           {formatPrice(item.product.price)}
         </p>
 
-        <div className="flex items-center gap-2">
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Button
-            variant="outline"
-            size="icon"
-            className="h-7 w-7"
+            type="default"
+            size="small"
+            icon={<MinusOutlined />}
             onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
             aria-label="Decrease quantity"
-          >
-            <Minus className="h-3 w-3" />
-          </Button>
-          <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
+            style={{ width: 28, height: 28, padding: 0, display: "flex", alignItems: "center", justifyContent: "center" }}
+          />
+          <span style={{ width: 32, textAlign: "center", fontSize: 14, fontWeight: 500 }}>{item.quantity}</span>
           <Button
-            variant="outline"
-            size="icon"
-            className="h-7 w-7"
+            type="default"
+            size="small"
+            icon={<PlusOutlined />}
             onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
             aria-label="Increase quantity"
-          >
-            <Plus className="h-3 w-3" />
-          </Button>
+            style={{ width: 28, height: 28, padding: 0, display: "flex", alignItems: "center", justifyContent: "center" }}
+          />
         </div>
       </div>
     </li>

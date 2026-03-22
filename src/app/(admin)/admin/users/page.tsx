@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
-import { Users } from "lucide-react";
+import { Empty, Typography } from "antd";
 
 export const metadata: Metadata = { title: "Users" };
 
@@ -14,14 +14,17 @@ export default async function AdminUsersPage() {
   const users = await getAdminUsers();
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-neutral-900">Users</h1>
+    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <Typography.Title level={4} style={{ margin: 0 }}>Users</Typography.Title>
 
       {users.length === 0 && (
-        <div className="rounded-lg border border-dashed border-neutral-300 bg-white p-12 text-center">
-          <Users className="mx-auto h-10 w-10 text-neutral-300" />
-          <p className="mt-3 text-sm font-medium text-neutral-900">No users yet</p>
-          <p className="mt-1 text-sm text-neutral-500">Registered users will appear here.</p>
+        <div style={{ borderRadius: 8, border: "2px dashed #d1d5db", background: "#fff", padding: 48, display: "flex", justifyContent: "center" }}>
+          <Empty description={
+            <span>
+              <strong style={{ display: "block", color: "#111827" }}>No users yet</strong>
+              <span style={{ color: "#6b7280" }}>Registered users will appear here.</span>
+            </span>
+          } />
         </div>
       )}
     </div>

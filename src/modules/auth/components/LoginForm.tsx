@@ -1,12 +1,11 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/shared/components/ui/Button";
-import { Input } from "@/shared/components/ui/Input";
+import { Form, Input, Button, Alert, Typography } from "antd";
 import { useAuth } from "../hooks/useAuth";
 
 const schema = z.object({
@@ -23,7 +22,7 @@ export function LoginForm() {
   const { login, loginLoading } = useAuth();
 
   const {
-    register,
+    control,
     handleSubmit,
     setError,
     formState: { errors },
@@ -36,52 +35,57 @@ export function LoginForm() {
       await login(values);
       router.push(callbackUrl);
     } catch (err: unknown) {
-      const message =
-        err instanceof Error ? err.message : "Invalid email or password.";
+      const message = err instanceof Error ? err.message : "Invalid email or password.";
       setError("root", { message });
     }
   });
 
   return (
-    <form onSubmit={onSubmit} noValidate className="mt-6 space-y-4">
-      <Input
-        id="email"
-        type="email"
-        label="Email"
-        placeholder="you@example.com"
-        autoComplete="email"
-        autoFocus
-        error={errors.email?.message}
-        {...register("email")}
-      />
-
-      <Input
-        id="password"
-        type="password"
-        label="Password"
-        placeholder="••••••••"
-        autoComplete="current-password"
-        error={errors.password?.message}
-        {...register("password")}
-      />
-
-      {errors.root && (
-        <p className="text-sm text-red-600">{errors.root.message}</p>
-      )}
-
-      <Button type="submit" className="w-full" loading={loginLoading}>
-        Sign in
-      </Button>
-
-      <p className="text-center text-sm text-neutral-500">
-        Don&apos;t have an account?{" "}
-        <Link
-          href="/register"
-          className="font-medium text-blue-600 underline-offset-4 hover:underline hover:text-blue-700"
+    <form onSubmit={onSubmit} noValidate style={{ marginTop: 24 }}>
+      <Form layout="vertical" component="div">
+        <Form.Item
+          label="Email"
+          validateStatus={errors.email ? "error" : ""}
+          help={errors.email?.message}
         >
-          Create one
-        </Link>
-      </p>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <Input {...field} type="email" placeholder="you@example.com" autoComplete="email" autoFocus size="large" />
+            )}
+          />
+        </Form.Item>
+
+        <Form.Item
+          label="Password"
+          validateStatus={errors.password ? "error" : ""}
+          help={errors.password?.message}
+        >
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <Input.Password {...field} placeholder="••••••••" autoComplete="current-password" size="large" />
+            )}
+          />
+        </Form.Item>
+
+        {errors.root && (
+          <Alert message={errors.root.message} type="error" showIcon style={{ marginBottom: 16 }} />
+        )}
+
+        <Button type="primary" htmlType="submit" block size="large" loading={loginLoading}>
+          Sign in
+        </Button>
+
+        <Typography.Paragraph style={{ textAlign: "center", marginTop: 12, fontSize: 14, color: "#6b7280" }}>
+          Don&apos;t have an account?{" "}
+          <Link href="/register" style={{ color: "#2563EB", fontWeight: 500 }}>
+            Create one
+          </Link>
+        </Typography.Paragraph>
+      </Form>
     </form>
   );
 }

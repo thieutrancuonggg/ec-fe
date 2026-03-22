@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/shared/components/ui/Button";
+import { Button, Divider, Typography } from "antd";
 import { formatPrice } from "@/shared/lib/utils";
 import { useCart } from "../hooks/useCart";
 import { CART } from "@/config/constants";
@@ -13,38 +13,47 @@ export function CartSummary() {
   const total = subtotal + shipping;
 
   return (
-    <div className="rounded-lg border border-neutral-200 bg-neutral-50 p-6 space-y-4">
-      <h2 className="text-lg font-semibold text-neutral-900">Order Summary</h2>
+    <div style={{ borderRadius: 8, border: "1px solid #e5e7eb", background: "#f9fafb", padding: 24 }}>
+      <Typography.Title level={5} style={{ margin: "0 0 16px 0" }}>Order Summary</Typography.Title>
 
-      <dl className="space-y-2 text-sm">
-        <div className="flex justify-between">
-          <dt className="text-neutral-500">Subtotal</dt>
-          <dd className="font-medium text-neutral-900">{formatPrice(subtotal)}</dd>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8, fontSize: 14 }}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography.Text type="secondary">Subtotal</Typography.Text>
+          <Typography.Text strong>{formatPrice(subtotal)}</Typography.Text>
         </div>
-        <div className="flex justify-between">
-          <dt className="text-neutral-500">Shipping</dt>
-          <dd className="font-medium text-neutral-900">
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography.Text type="secondary">Shipping</Typography.Text>
+          <Typography.Text strong>
             {shippingFree ? (
-              <span className="text-emerald-600 font-semibold">Free</span>
+              <span style={{ color: "#22C55E", fontWeight: 600 }}>Free</span>
             ) : (
               formatPrice(shipping)
             )}
-          </dd>
+          </Typography.Text>
         </div>
         {!shippingFree && (
-          <p className="text-xs text-neutral-500">
+          <Typography.Text type="secondary" style={{ fontSize: 12 }}>
             Add {formatPrice(CART.FREE_SHIPPING_THRESHOLD - subtotal)} more for free shipping
-          </p>
+          </Typography.Text>
         )}
-        <div className="border-t border-neutral-200 pt-2 flex justify-between font-semibold">
-          <dt className="text-neutral-900">Total</dt>
-          <dd className="text-neutral-900">{formatPrice(total)}</dd>
-        </div>
-      </dl>
+      </div>
 
-      <Button asChild variant="cta" className="w-full h-12 text-base">
-        <Link href="/checkout">Proceed to Checkout</Link>
-      </Button>
+      <Divider style={{ margin: "12px 0" }} />
+
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
+        <Typography.Text strong style={{ fontSize: 15 }}>Total</Typography.Text>
+        <Typography.Text strong style={{ fontSize: 15 }}>{formatPrice(total)}</Typography.Text>
+      </div>
+
+      <Link href="/checkout">
+        <Button
+          block
+          size="large"
+          style={{ backgroundColor: "#F97316", borderColor: "#F97316", color: "#fff", height: 48, fontSize: 16 }}
+        >
+          Proceed to Checkout
+        </Button>
+      </Link>
     </div>
   );
 }

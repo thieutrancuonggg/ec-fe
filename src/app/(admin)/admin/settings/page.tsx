@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Typography } from "antd";
 
 export const metadata: Metadata = {
   title: "Settings — Admin",
@@ -7,8 +8,8 @@ export const metadata: Metadata = {
 export default function AdminSettingsPage() {
   return (
     <div>
-      <h1 className="text-2xl font-bold tracking-tight text-neutral-900">Settings</h1>
-      <p className="mt-4 text-neutral-500">Admin settings coming soon.</p>
+      <Typography.Title level={4} style={{ margin: "0 0 16px 0" }}>Settings</Typography.Title>
+      <Typography.Text type="secondary">Admin settings coming soon.</Typography.Text>
     </div>
   );
 }
