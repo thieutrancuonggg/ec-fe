@@ -1,3 +1,5 @@
+"use client";
+
 import { Container } from "@/shared/components/layout/Container";
 import { Skeleton } from "antd";
 

@@ -22,10 +22,14 @@ export function UserMenu() {
     );
   }
 
-  const initials = [user?.firstName, user?.lastName]
-    .filter(Boolean)
-    .map((n) => n![0].toUpperCase())
-    .join("") || "U";
+  const initials =
+    user?.name
+      ?.trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((w) => w[0]!.toUpperCase())
+      .join("") || "U";
 
   const items: MenuProps["items"] = [
     {
@@ -34,7 +38,7 @@ export function UserMenu() {
       label: (
         <div>
           <Typography.Text strong style={{ display: "block" }}>
-            {user?.firstName} {user?.lastName}
+            {user?.name}
           </Typography.Text>
           <Typography.Text type="secondary" style={{ fontSize: 12 }}>
             {user?.email}
@@ -66,7 +70,7 @@ export function UserMenu() {
             {initials}
           </Avatar>
           <span className="hidden sm:inline" style={{ fontSize: 14, fontWeight: 500, color: "#374151", maxWidth: 120, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-            {user?.firstName}
+            {user?.name}
           </span>
         </Space>
       </Button>

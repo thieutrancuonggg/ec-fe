@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Typography } from "antd";
 import { Container } from "@/shared/components/layout/Container";
 import { ProductGrid } from "@/modules/product/components/ProductGrid";
 import { getProducts } from "@/modules/product/services/productService";
@@ -30,13 +29,13 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   return (
     <Container as="main" className="py-10">
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32 }}>
-        <Typography.Title level={3} style={{ margin: 0 }}>
+        <h3 style={{ margin: 0, fontSize: 24, fontWeight: 600, color: "#111827" }}>
           {sp.q ? `Results for "${sp.q}"` : "All Products"}
-        </Typography.Title>
+        </h3>
         {sp.category && (
-          <Typography.Text type="secondary" style={{ textTransform: "capitalize" }}>
+          <span style={{ textTransform: "capitalize", color: "#6b7280", fontSize: 14 }}>
             Category: {sp.category}
-          </Typography.Text>
+          </span>
         )}
       </div>
       <ProductGrid products={result.data} />

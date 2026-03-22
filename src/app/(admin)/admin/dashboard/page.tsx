@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { cacheLife } from "next/cache";
-import { Typography } from "antd";
 import { AdminStatCard } from "@/modules/admin/components/AdminStatCard";
 import { ShoppingBag, Users, Package, TrendingUp } from "lucide-react";
 
@@ -18,7 +17,7 @@ export default async function AdminDashboardPage() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-      <Typography.Title level={4} style={{ margin: 0 }}>Dashboard</Typography.Title>
+      <h4 style={{ margin: 0, fontSize: 20, fontWeight: 600, color: "#111827" }}>Dashboard</h4>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <AdminStatCard

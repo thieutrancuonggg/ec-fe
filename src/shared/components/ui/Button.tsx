@@ -3,7 +3,7 @@
 import AntButton, { type ButtonProps as AntButtonProps } from "antd/es/button";
 import type { ReactNode, CSSProperties } from "react";
 
-export interface ButtonProps extends Omit<AntButtonProps, "type"> {
+export interface ButtonProps extends Omit<AntButtonProps, "type" | "size" | "variant"> {
   variant?: "default" | "cta" | "outline" | "secondary" | "ghost" | "link" | "destructive";
   asChild?: boolean;
   size?: "default" | "sm" | "lg" | "icon" | "small" | "middle" | "large";
@@ -45,7 +45,7 @@ export function Button({
   disabled,
   loading,
   onClick,
-  type,
+  htmlType,
   ...props
 }: ButtonProps) {
   const { type: antType, danger, style: variantStyle } = getAntProps(variant);
@@ -60,7 +60,7 @@ export function Button({
       disabled={disabled}
       loading={loading}
       onClick={onClick}
-      htmlType={type as AntButtonProps["htmlType"]}
+      htmlType={htmlType}
       {...props}
     >
       {children}

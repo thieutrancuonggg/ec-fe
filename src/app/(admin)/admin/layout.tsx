@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { Layout } from "antd";
-import { AdminSidebar } from "@/modules/admin/components/AdminSidebar";
-import { AdminHeader } from "@/modules/admin/components/AdminHeader";
+import { AdminLayoutShell } from "./AdminLayoutShell";
 
 export const metadata: Metadata = {
   title: {
@@ -16,15 +14,6 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <Layout style={{ minHeight: "100vh" }}>
-      <AdminSidebar />
-      <Layout>
-        <AdminHeader />
-        <Layout.Content style={{ padding: 24, overflow: "auto", background: "#f9fafb" }}>
-          {children}
-        </Layout.Content>
-      </Layout>
-    </Layout>
-  );
+  return <AdminLayoutShell>{children}</AdminLayoutShell>;
 }
+

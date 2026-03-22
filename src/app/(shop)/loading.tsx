@@ -1,3 +1,5 @@
+"use client";
+
 import { Container } from "@/shared/components/layout/Container";
 import { ProductCardSkeleton } from "@/modules/product/components/ProductCardSkeleton";
 import { Skeleton } from "antd";

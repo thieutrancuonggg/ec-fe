@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Typography } from "antd";
 import { siteConfig } from "@/config/site";
 import { RegisterForm } from "@/modules/auth/components/RegisterForm";
 
@@ -17,12 +16,12 @@ export default function RegisterPage() {
           <Link href="/" style={{ fontSize: 20, fontWeight: 700, color: "#2563EB", textDecoration: "none" }}>
             {siteConfig.name}
           </Link>
-          <Typography.Title level={3} style={{ marginTop: 16, marginBottom: 4 }}>
+          <h3 style={{ marginTop: 16, marginBottom: 4, fontSize: 24, fontWeight: 600, color: "#111827" }}>
             Create an account
-          </Typography.Title>
-          <Typography.Text type="secondary">
+          </h3>
+          <span style={{ color: "#6b7280", fontSize: 14 }}>
             Join {siteConfig.name} and start shopping
-          </Typography.Text>
+          </span>
 
           <Suspense>
             <RegisterForm />
