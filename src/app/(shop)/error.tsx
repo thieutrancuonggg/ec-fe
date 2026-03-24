@@ -18,18 +18,18 @@ export default function RootError({ error, reset }: ErrorPageProps) {
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 8rem)", padding: "48px 16px" }}>
       <Result
         status="error"
-        title="Something went wrong"
+        title="Đã xảy ra lỗi"
         subTitle={
           <>
-            An unexpected error occurred. Please try again.
+            Đã xảy ra lỗi không mong muốn. Vui lòng thử lại.
             {error.digest && (
-              <div style={{ marginTop: 4, fontSize: 12, color: "#9ca3af" }}>Error ID: {error.digest}</div>
+              <div style={{ marginTop: 4, fontSize: 12, color: "#9ca3af" }}>Mã lỗi: {error.digest}</div>
             )}
           </>
         }
         extra={[
           <Button key="retry" variant="primary" onClick={reset}>
-            Try again
+            Thử lại
           </Button>,
         ]}
       />

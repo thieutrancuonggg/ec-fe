@@ -11,8 +11,8 @@ import { Button } from "@/shared/components/ui/Button";
 import { useAuth } from "../hooks/useAuth";
 
 const schema = z.object({
-  email: z.string().min(1, "Email is required").email("Invalid email"),
-  password: z.string().min(1, "Password is required"),
+  email: z.string().min(1, "Email là bắt buộc").email("Email không hợp lệ"),
+  password: z.string().min(1, "Mật khẩu là bắt buộc"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -36,7 +36,7 @@ export function LoginForm() {
       router.push(callbackUrl);
     } catch (err: unknown) {
       setError("root", {
-        message: err instanceof Error ? err.message : "Invalid email or password.",
+        message: err instanceof Error ? err.message : "Email hoặc mật khẩu không đúng.",
       });
     }
   });
@@ -61,7 +61,7 @@ export function LoginForm() {
             {...field}
             label="Email"
             type="email"
-            placeholder="you@example.com"
+            placeholder="ban@example.com"
             autoComplete="email"
             autoFocus
             prefix={<MailOutlined className="text-gray-400" />}
@@ -79,7 +79,7 @@ export function LoginForm() {
           render={({ field }) => (
             <Input.Password
               {...field}
-              label="Password"
+              label="Mật khẩu"
               placeholder="••••••••"
               autoComplete="current-password"
               prefix={<LockOutlined className="text-gray-400" />}
@@ -94,7 +94,7 @@ export function LoginForm() {
             href="/forgot-password"
             className="text-xs text-blue-600 hover:text-blue-700 transition-colors"
           >
-            Forgot password?
+            Quên mật khẩu?
           </Link>
         </div>
       </div>
@@ -107,13 +107,13 @@ export function LoginForm() {
         loading={loginLoading}
         className="mt-1"
       >
-        Sign in
+        Đăng nhập
       </Button>
 
       <p className="text-center text-sm text-gray-500">
-        Don&apos;t have an account?{" "}
+        Chưa có tài khoản?{" "}
         <Link href="/register" className="font-medium text-blue-600 hover:text-blue-700 transition-colors">
-          Create one
+          Tạo ngay
         </Link>
       </p>
     </form>

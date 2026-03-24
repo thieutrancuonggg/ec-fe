@@ -41,7 +41,7 @@ export function CartItem({ item }: CartItemProps) {
             size="sm"
             icon={<DeleteOutlined />}
             onClick={() => removeItem(item.product.id)}
-            aria-label={`Remove ${item.product.name}`}
+            aria-label={`Xóa ${item.product.name}`}
             style={{ color: "#9ca3af", flexShrink: 0 }}
           />
         </div>
@@ -56,7 +56,7 @@ export function CartItem({ item }: CartItemProps) {
             size="sm"
             icon={<MinusOutlined />}
             onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-            aria-label="Decrease quantity"
+            aria-label="Giảm số lượng"
             style={{ width: 28, height: 28, padding: 0, display: "flex", alignItems: "center", justifyContent: "center" }}
           />
           <span style={{ width: 32, textAlign: "center", fontSize: 14, fontWeight: 500 }}>{item.quantity}</span>
@@ -65,7 +65,7 @@ export function CartItem({ item }: CartItemProps) {
             size="sm"
             icon={<PlusOutlined />}
             onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-            aria-label="Increase quantity"
+            aria-label="Tăng số lượng"
             style={{ width: 28, height: 28, padding: 0, display: "flex", alignItems: "center", justifyContent: "center" }}
           />
         </div>

@@ -16,7 +16,7 @@ export default function CartPage() {
   return (
     <Container as="main" className="py-10">
       <Typography.Title level={3} style={{ margin: "0 0 32px 0" }}>
-        Shopping Cart
+        Giỏ hàng
       </Typography.Title>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">

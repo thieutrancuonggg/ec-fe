@@ -17,11 +17,11 @@ import { siteConfig } from "@/config/site";
 import { useAdminStore } from "../store/adminStore";
 
 const navItems = [
-  { href: "/admin/dashboard", label: "Dashboard", icon: <DashboardOutlined /> },
-  { href: "/admin/products", label: "Products", icon: <ShoppingOutlined /> },
-  { href: "/admin/orders", label: "Orders", icon: <ShoppingCartOutlined /> },
-  { href: "/admin/users", label: "Users", icon: <TeamOutlined /> },
-  { href: "/admin/settings", label: "Settings", icon: <SettingOutlined /> },
+  { href: "/admin/dashboard", label: "Tổng quan", icon: <DashboardOutlined /> },
+  { href: "/admin/products", label: "Sản phẩm", icon: <ShoppingOutlined /> },
+  { href: "/admin/orders", label: "Đơn hàng", icon: <ShoppingCartOutlined /> },
+  { href: "/admin/users", label: "Người dùng", icon: <TeamOutlined /> },
+  { href: "/admin/settings", label: "Cài đặt", icon: <SettingOutlined /> },
 ];
 
 export function AdminSidebar() {

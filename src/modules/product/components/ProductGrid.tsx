@@ -28,8 +28,8 @@ export function ProductGrid({ products, loading = false, skeletonCount = 8 }: Pr
         <Empty
           description={
             <span>
-              <strong style={{ display: "block", fontSize: 16, color: "#111827" }}>No products found</strong>
-              <span style={{ color: "#6b7280", fontSize: 14 }}>Try adjusting your search or filter to find what you&apos;re looking for.</span>
+              <strong style={{ display: "block", fontSize: 16, color: "#111827" }}>Không tìm thấy sản phẩm</strong>
+              <span style={{ color: "#6b7280", fontSize: 14 }}>Hãy thử điều chỉnh tìm kiếm hoặc bộ lọc để tìm thấy sản phẩm bạn cần.</span>
             </span>
           }
         />

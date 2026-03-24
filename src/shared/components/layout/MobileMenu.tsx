@@ -7,9 +7,10 @@ import { MenuOutlined } from "@ant-design/icons";
 import { Button } from "@/shared/components/ui/Button";
 
 const navItems = [
-  { key: "products", label: <Link href="/products">Products</Link> },
-  { key: "new", label: <Link href="/products?category=new">New Arrivals</Link> },
-  { key: "sale", label: <Link href="/products?sale=true">Sale</Link> },
+  { key: "shop", label: <Link href="/products">Tất cả sản phẩm</Link> },
+  { key: "new", label: <Link href="/products?category=new">Hàng mới về</Link> },
+  { key: "bestsellers", label: <Link href="/products?sort=popular">Bán chạy nhất</Link> },
+  { key: "sale", label: <Link href="/products?sale=true">Khuyến mãi</Link> },
 ];
 
 export function MobileMenuButton() {
@@ -22,11 +23,11 @@ export function MobileMenuButton() {
         icon={<MenuOutlined />}
         onClick={() => setOpen(true)}
         className="md:hidden"
-        aria-label="Open menu"
+        aria-label="Mở menu"
       />
 
       <Drawer
-        title={<span style={{ color: "#2563EB", fontWeight: 700 }}>Menu</span>}
+        title={<span style={{ color: "#2563EB", fontWeight: 700 }}>Danh mục</span>}
         placement="left"
         onClose={() => setOpen(false)}
         open={open}
@@ -40,7 +41,7 @@ export function MobileMenuButton() {
           style={{ border: "none" }}
         />
         <div style={{ padding: "12px 16px", borderTop: "1px solid #f0f0f0", color: "#9ca3af", fontSize: 12 }}>
-          Free shipping on orders over $50
+          Miễn phí vận chuyển cho đơn hàng trên 500.000đ
         </div>
       </Drawer>
     </>

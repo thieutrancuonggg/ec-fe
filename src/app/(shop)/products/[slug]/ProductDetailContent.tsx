@@ -23,11 +23,11 @@ export function ProductDetailContent({ product }: ProductDetailContentProps) {
           {thumbnail ? (
             <Image src={thumbnail.url} alt={thumbnail.alt} fill sizes="(max-width: 1024px) 100vw, 50vw" style={{ objectFit: "cover" }} priority />
           ) : (
-            <div style={{ display: "flex", height: "100%", alignItems: "center", justifyContent: "center", color: "#d1d5db", fontSize: 14 }}>No image</div>
+            <div style={{ display: "flex", height: "100%", alignItems: "center", justifyContent: "center", color: "#d1d5db", fontSize: 14 }}>Không có hình ảnh</div>
           )}
           {isOnSale && (
             <div style={{ position: "absolute", left: 16, top: 16 }}>
-              <Badge variant="destructive">Sale</Badge>
+              <Badge variant="destructive">Khuyến mãi</Badge>
             </div>
           )}
         </div>
@@ -40,7 +40,7 @@ export function ProductDetailContent({ product }: ProductDetailContentProps) {
               <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 8 }}>
                 <Rate disabled defaultValue={product.rating} style={{ fontSize: 14 }} />
                 <Typography.Text type="secondary" style={{ fontSize: 14 }}>
-                  {product.rating.toFixed(1)} ({product.reviewCount} reviews)
+                  {product.rating.toFixed(1)} ({product.reviewCount} đánh giá)
                 </Typography.Text>
               </div>
             )}

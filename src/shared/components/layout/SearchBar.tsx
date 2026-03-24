@@ -12,13 +12,17 @@ export function SearchBar() {
   }
 
   return (
-    <Input.Search
-      placeholder="Search products…"
-      onSearch={handleSearch}
-      style={{ width: 200 }}
-      size="middle"
+    <div
       className="hidden sm:block"
-      aria-label="Search products"
-    />
+      style={{ width: 260, flexShrink: 0 }}
+    >
+      <Input.Search
+        placeholder="Tìm kiếm sản phẩm…"
+        onSearch={handleSearch}
+        size="large"
+        aria-label="Tìm kiếm sản phẩm"
+        className="header-search"
+      />
+    </div>
   );
 }

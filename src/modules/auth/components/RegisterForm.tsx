@@ -14,20 +14,20 @@ const schema = z
   .object({
     name: z
       .string()
-      .min(1, "Name is required")
-      .max(100, "Name must be at most 100 characters"),
-    email: z.string().min(1, "Email is required").email("Invalid email"),
+      .min(1, "Họ tên là bắt buộc")
+      .max(100, "Họ tên không được vượt quá 100 ký tự"),
+    email: z.string().min(1, "Email là bắt buộc").email("Email không hợp lệ"),
     password: z
       .string()
-      .min(8, "Password must be at least 8 characters")
-      .max(128, "Password must be at most 128 characters")
-      .regex(/[A-Z]/, "Must contain at least one uppercase letter")
-      .regex(/[a-z]/, "Must contain at least one lowercase letter")
-      .regex(/[0-9]/, "Must contain at least one number"),
-    confirmPassword: z.string().min(1, "Please confirm your password"),
+      .min(8, "Mật khẩu phải có ít nhất 8 ký tự")
+      .max(128, "Mật khẩu không được vượt quá 128 ký tự")
+      .regex(/[A-Z]/, "Phải chứa ít nhất một chữ hoa")
+      .regex(/[a-z]/, "Phải chứa ít nhất một chữ thường")
+      .regex(/[0-9]/, "Phải chứa ít nhất một chữ số"),
+    confirmPassword: z.string().min(1, "Vui lòng xác nhận mật khẩu"),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
+    message: "Mật khẩu không khớp",
     path: ["confirmPassword"],
   });
 
@@ -50,7 +50,7 @@ export function RegisterForm() {
       router.push("/");
     } catch (err: unknown) {
       setError("root", {
-        message: err instanceof Error ? err.message : "Registration failed. Try again.",
+        message: err instanceof Error ? err.message : "Đăng ký không thành công. Vui lòng thử lại.",
       });
     }
   });
@@ -73,9 +73,9 @@ export function RegisterForm() {
         render={({ field }) => (
           <Input
             {...field}
-            label="Full name"
+            label="Họ và tên"
             type="text"
-            placeholder="Jane Doe"
+            placeholder="Nguyễn Văn A"
             autoComplete="name"
             autoFocus
             prefix={<UserOutlined className="text-gray-400" />}
@@ -94,7 +94,7 @@ export function RegisterForm() {
             {...field}
             label="Email"
             type="email"
-            placeholder="you@example.com"
+            placeholder="ban@example.com"
             autoComplete="email"
             prefix={<MailOutlined className="text-gray-400" />}
             error={errors.email?.message}
@@ -110,11 +110,11 @@ export function RegisterForm() {
         render={({ field }) => (
           <Input.Password
             {...field}
-            label="Password"
+            label="Mật khẩu"
             placeholder="••••••••"
             autoComplete="new-password"
             prefix={<LockOutlined className="text-gray-400" />}
-            hint="Min 8 characters, uppercase, lowercase, and number"
+            hint="Tối thiểu 8 ký tự, có chữ hoa, chữ thường và số"
             error={errors.password?.message}
             required
             size="large"
@@ -128,7 +128,7 @@ export function RegisterForm() {
         render={({ field }) => (
           <Input.Password
             {...field}
-            label="Confirm password"
+            label="Xác nhận mật khẩu"
             placeholder="••••••••"
             autoComplete="new-password"
             prefix={<LockOutlined className="text-gray-400" />}
@@ -147,13 +147,13 @@ export function RegisterForm() {
         loading={registerLoading}
         className="mt-1"
       >
-        Create account
+        Tạo tài khoản
       </Button>
 
       <p className="text-center text-sm text-gray-500">
-        Already have an account?{" "}
+        Đã có tài khoản?{" "}
         <Link href="/login" className="font-medium text-blue-600 hover:text-blue-700 transition-colors">
-          Sign in
+          Đăng nhập
         </Link>
       </p>
     </form>

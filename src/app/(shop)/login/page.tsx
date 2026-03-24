@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
 import { LoginForm } from "@/modules/auth/components/LoginForm";
 
 export const metadata: Metadata = {
-  title: `Sign in – ${siteConfig.name}`,
+  title: `Đăng nhập – ${siteConfig.name}`,
 };
 
 export default function LoginPage() {
@@ -25,10 +25,10 @@ export default function LoginPage() {
           {/* Heading */}
           <div className="mt-7 mb-7">
             <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
-              Welcome back
+              Chào mừng trở lại
             </h1>
             <p className="mt-1 text-sm text-gray-500">
-              Sign in to your account to continue
+              Đăng nhập vào tài khoản của bạn để tiếp tục
             </p>
           </div>
 
@@ -40,7 +40,7 @@ export default function LoginPage() {
 
         <p className="mt-6 text-center text-sm text-gray-400">
           <Link href="/" className="text-gray-400 hover:text-gray-600 transition-colors">
-            ← Back to shop
+            ← Quay lại cửa hàng
           </Link>
         </p>
       </div>

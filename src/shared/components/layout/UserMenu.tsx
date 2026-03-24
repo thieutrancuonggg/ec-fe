@@ -14,10 +14,10 @@ export function UserMenu() {
     return (
       <Space className="hidden sm:flex">
         <Button variant="ghost" size="sm">
-          <Link href="/login" style={{ color: "inherit", textDecoration: "none" }}>Sign in</Link>
+          <Link href="/login" style={{ color: "inherit", textDecoration: "none" }}>Đăng nhập</Link>
         </Button>
         <Button variant="primary" size="sm">
-          <Link href="/register" style={{ color: "#fff", textDecoration: "none" }}>Register</Link>
+          <Link href="/register" style={{ color: "#fff", textDecoration: "none" }}>Đăng ký</Link>
         </Button>
       </Space>
     );
@@ -51,13 +51,13 @@ export function UserMenu() {
     {
       key: "account",
       icon: <UserOutlined />,
-      label: <Link href="/account" style={{ textDecoration: "none" }}>My Account</Link>,
+      label: <Link href="/account" style={{ textDecoration: "none" }}>Tài khoản của tôi</Link>,
     },
     { type: "divider" },
     {
       key: "logout",
       icon: <LogoutOutlined />,
-      label: logoutLoading ? "Signing out…" : "Sign out",
+      label: logoutLoading ? "Đang đăng xuất…" : "Đăng xuất",
       danger: true,
       onClick: logout,
     },

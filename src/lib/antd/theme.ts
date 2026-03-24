@@ -1,7 +1,7 @@
 import type { ThemeConfig } from "antd";
 
 export const antdTheme: ThemeConfig = {
-  cssVar: true,
+  cssVar: { key: "ec" },
   token: {
     colorPrimary: "#2563EB",
     colorSuccess: "#22C55E",

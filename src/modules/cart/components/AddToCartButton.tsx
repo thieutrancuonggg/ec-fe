@@ -19,10 +19,10 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
       block
       disabled={!product.inStock}
       onClick={() => addItem(product, 1)}
-      aria-label={`Add ${product.name} to cart`}
+      aria-label={`Thêm ${product.name} vào giỏ hàng`}
       icon={<ShoppingCartOutlined />}
     >
-      {product.inStock ? "Add to Cart" : "Out of Stock"}
+      {product.inStock ? "Thêm vào giỏ hàng" : "Hết hàng"}
     </Button>
   );
 }

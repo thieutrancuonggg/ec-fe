@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
 import { RegisterForm } from "@/modules/auth/components/RegisterForm";
 
 export const metadata: Metadata = {
-  title: `Create account – ${siteConfig.name}`,
+  title: `Tạo tài khoản – ${siteConfig.name}`,
 };
 
 export default function RegisterPage() {
@@ -25,10 +25,10 @@ export default function RegisterPage() {
           {/* Heading */}
           <div className="mt-7 mb-7">
             <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
-              Create an account
+              Tạo tài khoản
             </h1>
             <p className="mt-1 text-sm text-gray-500">
-              Join {siteConfig.name} and start shopping
+              Tham gia {siteConfig.name} và bắt đầu mua sắm
             </p>
           </div>
 
@@ -39,7 +39,7 @@ export default function RegisterPage() {
 
         <p className="mt-6 text-center text-sm text-gray-400">
           <Link href="/" className="text-gray-400 hover:text-gray-600 transition-colors">
-            ← Back to shop
+            ← Quay lại cửa hàng
           </Link>
         </p>
       </div>

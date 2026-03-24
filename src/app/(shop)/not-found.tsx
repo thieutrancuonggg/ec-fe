@@ -9,14 +9,14 @@ export default function NotFound() {
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 8rem)", padding: "48px 16px" }}>
       <Result
         status="404"
-        title="Page not found"
-        subTitle="Sorry, we couldn't find the page you're looking for."
+        title="Trang không tìm thấy"
+        subTitle="Xin lỗi, chúng tôi không tìm thấy trang bạn đang tìm kiếm."
         extra={[
           <Link key="home" href="/">
-            <Button variant="primary">Go home</Button>
+            <Button variant="primary">Về trang chủ</Button>
           </Link>,
           <Link key="products" href="/products">
-            <Button variant="outline">Browse products</Button>
+            <Button variant="outline">Xem sản phẩm</Button>
           </Link>,
         ]}
       />

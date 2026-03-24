@@ -3,14 +3,14 @@
 import { Layout, Avatar, Space, Typography } from "antd";
 import { BellOutlined, SearchOutlined } from "@ant-design/icons";
 import { Button } from "@/shared/components/ui/Button";
-import { useUserStore } from "@/modules/user/store/userStore";
+import { useAuthStore } from "@/modules/auth/store/authStore";
 
 interface AdminHeaderProps {
   title?: string;
 }
 
 export function AdminHeader({ title }: AdminHeaderProps) {
-  const { user } = useUserStore();
+  const { user } = useAuthStore();
 
   return (
     <Layout.Header
@@ -36,11 +36,11 @@ export function AdminHeader({ title }: AdminHeaderProps) {
 
         <div style={{ display: "flex", alignItems: "center", gap: 8, borderLeft: "1px solid #e5e7eb", paddingLeft: 12 }}>
           <Avatar size={32} style={{ backgroundColor: "#2563EB", fontSize: 12, fontWeight: 700 }}>
-            {user?.firstName?.charAt(0).toUpperCase() ?? "A"}
+            {user?.name?.charAt(0).toUpperCase() ?? "A"}
           </Avatar>
           {user && (
             <Typography.Text strong className="hidden sm:block" style={{ fontSize: 14, color: "#374151" }}>
-              {user.firstName} {user.lastName}
+              {user.name}
             </Typography.Text>
           )}
         </div>

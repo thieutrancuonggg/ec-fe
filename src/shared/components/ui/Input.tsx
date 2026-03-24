@@ -151,14 +151,30 @@ TextAreaInner.displayName = "Input.TextArea";
 const SearchInner = forwardRef<
   React.ElementRef<typeof AntInput.Search>,
   SearchProps
->(({ label, hint, error, id: idProp, ...rest }, ref) => {
+>(({ label, hint, error, id: idProp, className, style, ...rest }, ref) => {
   const { id, ariaProps } = useField(idProp, { error, hint });
+  const hasWrapper = label || hint || error;
+  if (!hasWrapper) {
+    return (
+      <AntInput.Search
+        ref={ref}
+        id={id}
+        status={error ? "error" : undefined}
+        className={className}
+        style={{ width: "100%", ...style }}
+        {...ariaProps}
+        {...rest}
+      />
+    );
+  }
   return (
     <Field id={id} label={label} hint={hint} error={error}>
       <AntInput.Search
         ref={ref}
         id={id}
         status={error ? "error" : undefined}
+        className={className}
+        style={{ width: "100%", ...style }}
         {...ariaProps}
         {...rest}
       />

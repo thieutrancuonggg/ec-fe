@@ -19,14 +19,14 @@ export default function ProductDetailError({ error, reset }: ProductErrorProps) 
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "calc(100vh - 8rem)", padding: "48px 16px" }}>
       <Result
         status="error"
-        title="Failed to load product"
-        subTitle="We couldn't load this product. Please try again."
+        title="Không thể tải sản phẩm"
+        subTitle="Đã xảy ra lỗi khi tải sản phẩm này. Vui lòng thử lại."
         extra={[
           <Button key="retry" variant="primary" onClick={reset}>
-            Try again
+            Thử lại
           </Button>,
           <Link key="back" href="/products">
-            <Button variant="outline">Back to Products</Button>
+            <Button variant="outline">Quay lại sản phẩm</Button>
           </Link>,
         ]}
       />
