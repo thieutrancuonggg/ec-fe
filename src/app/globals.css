@@ -1,3 +1,15 @@
+/*
+ * Layer priority (low → high): theme < base < antd < utilities
+ *
+ * - base   : Tailwind preflight (CSS reset) — must NOT override antd
+ * - antd   : Ant Design component styles — sits above preflight
+ * - utilities: Tailwind utility classes — can still override antd when needed
+ *
+ * Rule: layers declared earlier = lower priority.
+ * Declaring this order BEFORE @import locks it in for the entire cascade.
+ */
+@layer theme, base, antd, utilities;
+
 @import "tailwindcss";
 
 body {

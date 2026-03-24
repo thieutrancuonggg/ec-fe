@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { Button } from "antd";
+import { Button } from "@/shared/components/ui/Button";
 
 interface GlobalErrorProps {
   error: Error & { digest?: string };
@@ -23,7 +23,7 @@ export default function GlobalError({ error, reset }: GlobalErrorProps) {
         {error.digest && (
           <p style={{ fontSize: 12, color: "#9ca3af", margin: "0 0 24px" }}>Error ID: {error.digest}</p>
         )}
-        <Button type="primary" onClick={reset} style={{ marginTop: 24 }}>
+        <Button variant="primary" onClick={reset} style={{ marginTop: 24 }}>
           Refresh
         </Button>
       </body>

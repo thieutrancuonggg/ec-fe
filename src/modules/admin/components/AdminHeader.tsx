@@ -1,7 +1,8 @@
 "use client";
 
-import { Layout, Avatar, Button, Space, Typography } from "antd";
+import { Layout, Avatar, Space, Typography } from "antd";
 import { BellOutlined, SearchOutlined } from "@ant-design/icons";
+import { Button } from "@/shared/components/ui/Button";
 import { useUserStore } from "@/modules/user/store/userStore";
 
 interface AdminHeaderProps {
@@ -30,8 +31,8 @@ export function AdminHeader({ title }: AdminHeaderProps) {
       )}
 
       <Space size={8}>
-        <Button type="text" icon={<SearchOutlined />} aria-label="Search" />
-        <Button type="text" icon={<BellOutlined />} aria-label="Notifications" />
+        <Button variant="ghost" icon={<SearchOutlined />} aria-label="Search" />
+        <Button variant="ghost" icon={<BellOutlined />} aria-label="Notifications" />
 
         <div style={{ display: "flex", alignItems: "center", gap: 8, borderLeft: "1px solid #e5e7eb", paddingLeft: 12 }}>
           <Avatar size={32} style={{ backgroundColor: "#2563EB", fontSize: 12, fontWeight: 700 }}>

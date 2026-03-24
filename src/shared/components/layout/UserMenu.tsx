@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Avatar, Button, Dropdown, Space, Typography } from "antd";
+import { Avatar, Dropdown, Space, Typography } from "antd";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Button } from "@/shared/components/ui/Button";
 import { useAuth } from "@/modules/auth/hooks/useAuth";
 import type { MenuProps } from "antd";
 
@@ -12,10 +13,10 @@ export function UserMenu() {
   if (!isAuthenticated) {
     return (
       <Space className="hidden sm:flex">
-        <Button type="text" size="small">
+        <Button variant="ghost" size="sm">
           <Link href="/login" style={{ color: "inherit", textDecoration: "none" }}>Sign in</Link>
         </Button>
-        <Button type="primary" size="small">
+        <Button variant="primary" size="sm">
           <Link href="/register" style={{ color: "#fff", textDecoration: "none" }}>Register</Link>
         </Button>
       </Space>
@@ -64,7 +65,7 @@ export function UserMenu() {
 
   return (
     <Dropdown menu={{ items }} trigger={["click"]} placement="bottomRight">
-      <Button type="text" style={{ padding: "4px 8px", height: "auto" }}>
+      <Button variant="ghost" style={{ padding: "4px 8px", height: "auto" }}>
         <Space size={6}>
           <Avatar size={28} style={{ backgroundColor: "#2563EB", fontSize: 12, fontWeight: 700 }}>
             {initials}

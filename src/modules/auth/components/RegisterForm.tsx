@@ -5,7 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Form, Input, Button, Alert, Typography } from "antd";
+import { UserOutlined, MailOutlined, LockOutlined } from "@ant-design/icons";
+import { Input } from "@/shared/components/ui/Input";
+import { Button } from "@/shared/components/ui/Button";
 import { useAuth } from "../hooks/useAuth";
 
 const schema = z
@@ -40,95 +42,120 @@ export function RegisterForm() {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-  });
+  } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
   const onSubmit = handleSubmit(async ({ name, email, password }) => {
     try {
       await registerUser({ name, email, password });
       router.push("/");
     } catch (err: unknown) {
-      const message =
-        err instanceof Error ? err.message : "Registration failed. Try again.";
-      setError("root", { message });
+      setError("root", {
+        message: err instanceof Error ? err.message : "Registration failed. Try again.",
+      });
     }
   });
 
   return (
-    <form onSubmit={onSubmit} noValidate style={{ marginTop: 24 }}>
-      <Form layout="vertical" component="div">
-        <Form.Item
-          label="Full name"
-          validateStatus={errors.name ? "error" : ""}
-          help={errors.name?.message}
+    <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
+      {/* Root error */}
+      {errors.root && (
+        <div
+          role="alert"
+          className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
         >
-          <Controller
-            name="name"
-            control={control}
-            render={({ field }) => (
-              <Input {...field} type="text" placeholder="Jane Doe" autoComplete="name" autoFocus size="large" />
-            )}
-          />
-        </Form.Item>
+          {errors.root.message}
+        </div>
+      )}
 
-        <Form.Item
-          label="Email"
-          validateStatus={errors.email ? "error" : ""}
-          help={errors.email?.message}
-        >
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <Input {...field} type="email" placeholder="you@example.com" autoComplete="email" size="large" />
-            )}
+      <Controller
+        name="name"
+        control={control}
+        render={({ field }) => (
+          <Input
+            {...field}
+            label="Full name"
+            type="text"
+            placeholder="Jane Doe"
+            autoComplete="name"
+            autoFocus
+            prefix={<UserOutlined className="text-gray-400" />}
+            error={errors.name?.message}
+            required
+            size="large"
           />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          validateStatus={errors.password ? "error" : ""}
-          help={errors.password?.message}
-        >
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <Input.Password {...field} placeholder="••••••••" autoComplete="new-password" size="large" />
-            )}
-          />
-        </Form.Item>
-
-        <Form.Item
-          label="Confirm password"
-          validateStatus={errors.confirmPassword ? "error" : ""}
-          help={errors.confirmPassword?.message}
-        >
-          <Controller
-            name="confirmPassword"
-            control={control}
-            render={({ field }) => (
-              <Input.Password {...field} placeholder="••••••••" autoComplete="new-password" size="large" />
-            )}
-          />
-        </Form.Item>
-
-        {errors.root && (
-          <Alert message={errors.root.message} type="error" showIcon style={{ marginBottom: 16 }} />
         )}
+      />
 
-        <Button type="primary" htmlType="submit" block size="large" loading={registerLoading}>
-          Create account
-        </Button>
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <Input
+            {...field}
+            label="Email"
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="email"
+            prefix={<MailOutlined className="text-gray-400" />}
+            error={errors.email?.message}
+            required
+            size="large"
+          />
+        )}
+      />
 
-        <Typography.Paragraph style={{ textAlign: "center", marginTop: 12, fontSize: 14, color: "#6b7280" }}>
-          Already have an account?{" "}
-          <Link href="/login" style={{ color: "#2563EB", fontWeight: 500 }}>
-            Sign in
-          </Link>
-        </Typography.Paragraph>
-      </Form>
+      <Controller
+        name="password"
+        control={control}
+        render={({ field }) => (
+          <Input.Password
+            {...field}
+            label="Password"
+            placeholder="••••••••"
+            autoComplete="new-password"
+            prefix={<LockOutlined className="text-gray-400" />}
+            hint="Min 8 characters, uppercase, lowercase, and number"
+            error={errors.password?.message}
+            required
+            size="large"
+          />
+        )}
+      />
+
+      <Controller
+        name="confirmPassword"
+        control={control}
+        render={({ field }) => (
+          <Input.Password
+            {...field}
+            label="Confirm password"
+            placeholder="••••••••"
+            autoComplete="new-password"
+            prefix={<LockOutlined className="text-gray-400" />}
+            error={errors.confirmPassword?.message}
+            required
+            size="large"
+          />
+        )}
+      />
+
+      <Button
+        variant="primary"
+        size="lg"
+        htmlType="submit"
+        block
+        loading={registerLoading}
+        className="mt-1"
+      >
+        Create account
+      </Button>
+
+      <p className="text-center text-sm text-gray-500">
+        Already have an account?{" "}
+        <Link href="/login" className="font-medium text-blue-600 hover:text-blue-700 transition-colors">
+          Sign in
+        </Link>
+      </p>
     </form>
   );
 }

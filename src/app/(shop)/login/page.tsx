@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ShoppingOutlined } from "@ant-design/icons";
 import { siteConfig } from "@/config/site";
 import { LoginForm } from "@/modules/auth/components/LoginForm";
 
@@ -10,24 +11,39 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <div style={{ display: "flex", minHeight: "calc(100vh - 4rem)", alignItems: "center", justifyContent: "center", padding: "48px 16px" }}>
-      <div style={{ width: "100%", maxWidth: 384 }}>
-        <div style={{ borderRadius: 12, border: "1px solid #e5e7eb", background: "#fff", padding: 32, boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
-          <Link href="/" style={{ fontSize: 20, fontWeight: 700, color: "#2563EB", textDecoration: "none" }}>
-            {siteConfig.name}
+    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-gradient-to-br from-slate-50 via-white to-blue-50 px-4 py-12">
+      <div className="w-full max-w-sm">
+        <div className="rounded-2xl bg-white px-8 py-10 shadow-lg ring-1 ring-gray-900/5">
+          {/* Brand */}
+          <Link href="/" className="flex items-center gap-2.5 no-underline">
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-600">
+              <ShoppingOutlined className="text-lg text-white" />
+            </span>
+            <span className="text-lg font-bold text-blue-600">{siteConfig.name}</span>
           </Link>
-          <h3 style={{ marginTop: 16, marginBottom: 4, fontSize: 24, fontWeight: 600, color: "#111827" }}>
-            Welcome back
-          </h3>
-          <span style={{ color: "#6b7280", fontSize: 14 }}>
-            Sign in to your account to continue
-          </span>
 
+          {/* Heading */}
+          <div className="mt-7 mb-7">
+            <h1 className="text-2xl font-semibold tracking-tight text-gray-900">
+              Welcome back
+            </h1>
+            <p className="mt-1 text-sm text-gray-500">
+              Sign in to your account to continue
+            </p>
+          </div>
+
+          {/* Form — Suspense required for useSearchParams inside */}
           <Suspense>
             <LoginForm />
           </Suspense>
         </div>
+
+        <p className="mt-6 text-center text-sm text-gray-400">
+          <Link href="/" className="text-gray-400 hover:text-gray-600 transition-colors">
+            ← Back to shop
+          </Link>
+        </p>
       </div>
-    </div>
+    </main>
   );
 }

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Drawer, Menu, Button } from "antd";
+import { Drawer, Menu } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
+import { Button } from "@/shared/components/ui/Button";
 
 const navItems = [
   { key: "products", label: <Link href="/products">Products</Link> },
@@ -17,7 +18,7 @@ export function MobileMenuButton() {
   return (
     <>
       <Button
-        type="text"
+        variant="ghost"
         icon={<MenuOutlined />}
         onClick={() => setOpen(true)}
         className="md:hidden"

@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Button, Typography } from "antd";
+import { Typography } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Button } from "@/shared/components/ui/Button";
 
 export function CartEmpty() {
   return (
@@ -11,7 +12,7 @@ export function CartEmpty() {
         Looks like you haven&apos;t added anything to your cart yet.
       </Typography.Text>
       <Link href="/products">
-        <Button type="primary" size="large" style={{ marginTop: 24 }}>
+        <Button variant="primary" size="lg" style={{ marginTop: 24 }}>
           Start Shopping
         </Button>
       </Link>

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { Result, Button } from "antd";
+import { Result } from "antd";
+import { Button } from "@/shared/components/ui/Button";
 
 interface ProductsErrorProps {
   error: Error & { digest?: string };
@@ -20,7 +21,7 @@ export default function ProductsError({ error, reset }: ProductsErrorProps) {
         title="Failed to load products"
         subTitle="We couldn't load the products. Please try again."
         extra={[
-          <Button key="retry" type="primary" onClick={reset}>
+          <Button key="retry" variant="primary" onClick={reset}>
             Try again
           </Button>,
         ]}

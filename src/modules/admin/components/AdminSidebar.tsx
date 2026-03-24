@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Layout, Menu, Button } from "antd";
+import { Layout, Menu } from "antd";
 import {
   DashboardOutlined,
   ShoppingOutlined,
@@ -12,6 +12,7 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from "@ant-design/icons";
+import { Button } from "@/shared/components/ui/Button";
 import { siteConfig } from "@/config/site";
 import { useAdminStore } from "../store/adminStore";
 
@@ -66,7 +67,7 @@ export function AdminSidebar() {
 
       {/* Collapse toggle */}
       <Button
-        type="text"
+        variant="ghost"
         icon={sidebarCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         onClick={toggleSidebar}
         aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}

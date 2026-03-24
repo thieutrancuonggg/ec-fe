@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { Result, Button } from "antd";
+import { Result } from "antd";
+import { Button } from "@/shared/components/ui/Button";
 
 interface ErrorPageProps {
   error: Error & { digest?: string };
@@ -27,7 +28,7 @@ export default function RootError({ error, reset }: ErrorPageProps) {
           </>
         }
         extra={[
-          <Button key="retry" type="primary" onClick={reset}>
+          <Button key="retry" variant="primary" onClick={reset}>
             Try again
           </Button>,
         ]}

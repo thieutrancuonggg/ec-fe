@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "antd";
 import { MinusOutlined, PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Button } from "@/shared/components/ui/Button";
 import { formatPrice } from "@/shared/lib/utils";
 import { useCart } from "../hooks/useCart";
 import { type CartItem as CartItemType } from "../types";
@@ -37,13 +37,12 @@ export function CartItem({ item }: CartItemProps) {
             {item.product.name}
           </p>
           <Button
-            type="text"
-            size="small"
+            variant="ghost"
+            size="sm"
             icon={<DeleteOutlined />}
             onClick={() => removeItem(item.product.id)}
             aria-label={`Remove ${item.product.name}`}
             style={{ color: "#9ca3af", flexShrink: 0 }}
-            danger
           />
         </div>
 
@@ -53,8 +52,8 @@ export function CartItem({ item }: CartItemProps) {
 
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Button
-            type="default"
-            size="small"
+            variant="outline"
+            size="sm"
             icon={<MinusOutlined />}
             onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
             aria-label="Decrease quantity"
@@ -62,8 +61,8 @@ export function CartItem({ item }: CartItemProps) {
           />
           <span style={{ width: 32, textAlign: "center", fontSize: 14, fontWeight: 500 }}>{item.quantity}</span>
           <Button
-            type="default"
-            size="small"
+            variant="outline"
+            size="sm"
             icon={<PlusOutlined />}
             onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
             aria-label="Increase quantity"

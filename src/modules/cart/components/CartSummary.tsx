@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Button, Divider, Typography } from "antd";
+import { Divider, Typography } from "antd";
+import { Button } from "@/shared/components/ui/Button";
 import { formatPrice } from "@/shared/lib/utils";
 import { useCart } from "../hooks/useCart";
 import { CART } from "@/config/constants";
@@ -46,11 +47,7 @@ export function CartSummary() {
       </div>
 
       <Link href="/checkout">
-        <Button
-          block
-          size="large"
-          style={{ backgroundColor: "#F97316", borderColor: "#F97316", color: "#fff", height: 48, fontSize: 16 }}
-        >
+        <Button variant="cta" size="lg" block style={{ height: 48, fontSize: 16 }}>
           Proceed to Checkout
         </Button>
       </Link>

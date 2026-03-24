@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Button, Typography } from "antd";
+import { Typography } from "antd";
+import { Button } from "@/shared/components/ui/Button";
 import { Container } from "@/shared/components/layout/Container";
 import { ProductGrid } from "@/modules/product/components/ProductGrid";
 import { type Product } from "@/modules/product/types";
@@ -23,15 +24,12 @@ export function HomeContent({ featuredProducts }: HomeContentProps) {
           </Typography.Paragraph>
           <div style={{ marginTop: 32, display: "flex", justifyContent: "center", gap: 16 }}>
             <Link href="/products">
-              <Button
-                size="large"
-                style={{ backgroundColor: "#F97316", borderColor: "#F97316", color: "#fff", height: 48, fontSize: 16, padding: "0 32px" }}
-              >
+              <Button variant="cta" size="lg" style={{ height: 48, fontSize: 16, padding: "0 32px" }}>
                 Shop Now
               </Button>
             </Link>
             <Link href="/products?category=new">
-              <Button size="large" style={{ height: 48, fontSize: 16, padding: "0 32px" }}>
+              <Button variant="outline" size="lg" style={{ height: 48, fontSize: 16, padding: "0 32px" }}>
                 New Arrivals
               </Button>
             </Link>

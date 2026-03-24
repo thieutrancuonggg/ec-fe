@@ -2,7 +2,9 @@
 
 import { type FormEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Form, Input, Button, Alert } from "antd";
+import { LockOutlined } from "@ant-design/icons";
+import { Input } from "@/shared/components/ui/Input";
+import { Button } from "@/shared/components/ui/Button";
 
 export function AdminLoginForm() {
   const router = useRouter();
@@ -34,27 +36,37 @@ export function AdminLoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: 24 }}>
-      <Form layout="vertical" component="div">
-        <Form.Item label="Password" validateStatus={error ? "error" : ""}>
-          <Input.Password
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-            autoFocus
-            size="large"
-          />
-        </Form.Item>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {error && (
+        <div
+          role="alert"
+          className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
+        >
+          {error}
+        </div>
+      )}
 
-        {error && (
-          <Alert message={error} type="error" showIcon style={{ marginBottom: 16 }} />
-        )}
+      <Input.Password
+        label="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Enter admin password"
+        prefix={<LockOutlined className="text-gray-400" />}
+        error={error ? " " : undefined}
+        required
+        autoFocus
+        size="large"
+      />
 
-        <Button type="primary" htmlType="submit" block size="large" loading={loading}>
-          {loading ? "Signing in…" : "Sign in"}
-        </Button>
-      </Form>
+      <Button
+        variant="primary"
+        size="lg"
+        htmlType="submit"
+        block
+        loading={loading}
+      >
+        {loading ? "Signing in…" : "Sign in"}
+      </Button>
     </form>
   );
 }

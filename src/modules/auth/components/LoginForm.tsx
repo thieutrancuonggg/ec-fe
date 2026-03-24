@@ -5,7 +5,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Form, Input, Button, Alert, Typography } from "antd";
+import { MailOutlined, LockOutlined } from "@ant-design/icons";
+import { Input } from "@/shared/components/ui/Input";
+import { Button } from "@/shared/components/ui/Button";
 import { useAuth } from "../hooks/useAuth";
 
 const schema = z.object({
@@ -26,66 +28,94 @@ export function LoginForm() {
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
-  });
+  } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
   const onSubmit = handleSubmit(async (values) => {
     try {
       await login(values);
       router.push(callbackUrl);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Invalid email or password.";
-      setError("root", { message });
+      setError("root", {
+        message: err instanceof Error ? err.message : "Invalid email or password.",
+      });
     }
   });
 
   return (
-    <form onSubmit={onSubmit} noValidate style={{ marginTop: 24 }}>
-      <Form layout="vertical" component="div">
-        <Form.Item
-          label="Email"
-          validateStatus={errors.email ? "error" : ""}
-          help={errors.email?.message}
+    <form onSubmit={onSubmit} noValidate className="flex flex-col gap-4">
+      {/* Root error */}
+      {errors.root && (
+        <div
+          role="alert"
+          className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600"
         >
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <Input {...field} type="email" placeholder="you@example.com" autoComplete="email" autoFocus size="large" />
-            )}
-          />
-        </Form.Item>
+          {errors.root.message}
+        </div>
+      )}
 
-        <Form.Item
-          label="Password"
-          validateStatus={errors.password ? "error" : ""}
-          help={errors.password?.message}
-        >
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <Input.Password {...field} placeholder="••••••••" autoComplete="current-password" size="large" />
-            )}
+      <Controller
+        name="email"
+        control={control}
+        render={({ field }) => (
+          <Input
+            {...field}
+            label="Email"
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="email"
+            autoFocus
+            prefix={<MailOutlined className="text-gray-400" />}
+            error={errors.email?.message}
+            required
+            size="large"
           />
-        </Form.Item>
-
-        {errors.root && (
-          <Alert message={errors.root.message} type="error" showIcon style={{ marginBottom: 16 }} />
         )}
+      />
 
-        <Button type="primary" htmlType="submit" block size="large" loading={loginLoading}>
-          Sign in
-        </Button>
-
-        <Typography.Paragraph style={{ textAlign: "center", marginTop: 12, fontSize: 14, color: "#6b7280" }}>
-          Don&apos;t have an account?{" "}
-          <Link href="/register" style={{ color: "#2563EB", fontWeight: 500 }}>
-            Create one
+      <div className="flex flex-col gap-1.5">
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => (
+            <Input.Password
+              {...field}
+              label="Password"
+              placeholder="••••••••"
+              autoComplete="current-password"
+              prefix={<LockOutlined className="text-gray-400" />}
+              error={errors.password?.message}
+              required
+              size="large"
+            />
+          )}
+        />
+        <div className="flex justify-end">
+          <Link
+            href="/forgot-password"
+            className="text-xs text-blue-600 hover:text-blue-700 transition-colors"
+          >
+            Forgot password?
           </Link>
-        </Typography.Paragraph>
-      </Form>
+        </div>
+      </div>
+
+      <Button
+        variant="primary"
+        size="lg"
+        htmlType="submit"
+        block
+        loading={loginLoading}
+        className="mt-1"
+      >
+        Sign in
+      </Button>
+
+      <p className="text-center text-sm text-gray-500">
+        Don&apos;t have an account?{" "}
+        <Link href="/register" className="font-medium text-blue-600 hover:text-blue-700 transition-colors">
+          Create one
+        </Link>
+      </p>
     </form>
   );
 }

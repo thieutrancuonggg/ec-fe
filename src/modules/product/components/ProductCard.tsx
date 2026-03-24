@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Card, Rate, Tag, Typography } from "antd";
@@ -9,7 +10,7 @@ interface ProductCardProps {
   priority?: boolean;
 }
 
-export function ProductCard({ product, priority = false }: ProductCardProps) {
+export const ProductCard = memo(function ProductCard({ product, priority = false }: ProductCardProps) {
   const isOnSale = product.compareAtPrice !== undefined && product.compareAtPrice > product.price;
   const discountPercent = isOnSale
     ? Math.round(((product.compareAtPrice! - product.price) / product.compareAtPrice!) * 100)
@@ -62,9 +63,9 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           )}
         </div>
         {product.rating > 0 && (
-          <Rate disabled defaultValue={product.rating} style={{ fontSize: 12 }} count={5} />
+          <Rate disabled value={product.rating} style={{ fontSize: 12 }} count={5} />
         )}
       </Card>
     </Link>
   );
-}
+});

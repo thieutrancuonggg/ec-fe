@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Result, Button } from "antd";
+import { Result } from "antd";
+import { Button } from "@/shared/components/ui/Button";
 
 export default function NotFound() {
   return (
@@ -12,10 +13,10 @@ export default function NotFound() {
         subTitle="Sorry, we couldn't find the page you're looking for."
         extra={[
           <Link key="home" href="/">
-            <Button type="primary">Go home</Button>
+            <Button variant="primary">Go home</Button>
           </Link>,
           <Link key="products" href="/products">
-            <Button>Browse products</Button>
+            <Button variant="outline">Browse products</Button>
           </Link>,
         ]}
       />

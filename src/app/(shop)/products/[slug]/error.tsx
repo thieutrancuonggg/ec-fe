@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { Result, Button } from "antd";
+import { Result } from "antd";
+import { Button } from "@/shared/components/ui/Button";
 
 interface ProductErrorProps {
   error: Error & { digest?: string };
@@ -21,11 +22,11 @@ export default function ProductDetailError({ error, reset }: ProductErrorProps) 
         title="Failed to load product"
         subTitle="We couldn't load this product. Please try again."
         extra={[
-          <Button key="retry" type="primary" onClick={reset}>
+          <Button key="retry" variant="primary" onClick={reset}>
             Try again
           </Button>,
           <Link key="back" href="/products">
-            <Button>Back to Products</Button>
+            <Button variant="outline">Back to Products</Button>
           </Link>,
         ]}
       />

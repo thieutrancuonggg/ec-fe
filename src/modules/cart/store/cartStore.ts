@@ -68,6 +68,6 @@ export const useCartStore = create<CartStore>()(
         partialize: (state) => ({ items: state.items }),
       }
     ),
-    { name: "CartStore" }
+    { name: "CartStore", enabled: process.env.NODE_ENV === "development" }
   )
 );

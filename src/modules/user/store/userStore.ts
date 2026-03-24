@@ -22,6 +22,6 @@ export const useUserStore = create<UserStore>()(
         }),
       }
     ),
-    { name: "UserStore" }
+    { name: "UserStore", enabled: process.env.NODE_ENV === "development" }
   )
 );

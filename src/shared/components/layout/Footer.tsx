@@ -1,6 +1,7 @@
 import Link from "next/link";
-import Paragraph from "antd/es/typography/Paragraph";
-import Title from "antd/es/typography/Title";
+import { Typography } from "antd";
+
+const { Paragraph, Title } = Typography;
 import { Container } from "./Container";
 import { siteConfig } from "@/config/site";
 import { CopyrightYear } from "./CopyrightYear";

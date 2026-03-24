@@ -38,7 +38,7 @@ export function Header() {
             <Link href="/" style={{ flexShrink: 0, fontSize: 20, fontWeight: 700, letterSpacing: "-0.025em", color: "#2563EB", textDecoration: "none" }}>
               {siteConfig.name}
             </Link>
-            <nav className="hidden md:flex" style={{ display: "flex", alignItems: "center", gap: 4, marginLeft: 24 }}>
+            <nav className="hidden md:flex" style={{ alignItems: "center", gap: 4, marginLeft: 24 }}>
               {navLinks.map((link) => (
                 <Link key={link.href} href={link.href} className="header-nav-link" style={{ fontSize: 14, fontWeight: 500, color: "#475569", textDecoration: "none", padding: "6px 12px", borderRadius: 6, transition: "color 0.2s" }}>
                   {link.label}

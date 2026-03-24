@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Button } from "@/shared/components/ui/Button";
 import { useCart } from "../hooks/useCart";
 import { type Product } from "@/modules/product/types";
 
@@ -14,13 +14,13 @@ export function AddToCartButton({ product }: AddToCartButtonProps) {
 
   return (
     <Button
-      size="large"
+      variant={product.inStock ? "cta" : "outline"}
+      size="lg"
       block
       disabled={!product.inStock}
       onClick={() => addItem(product, 1)}
       aria-label={`Add ${product.name} to cart`}
       icon={<ShoppingCartOutlined />}
-      style={product.inStock ? { backgroundColor: "#F97316", borderColor: "#F97316", color: "#fff" } : undefined}
     >
       {product.inStock ? "Add to Cart" : "Out of Stock"}
     </Button>

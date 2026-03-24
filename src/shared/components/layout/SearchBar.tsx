@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Input } from "antd";
+import { Input } from "@/shared/components/ui/Input";
 
 export function SearchBar() {
   const router = useRouter();

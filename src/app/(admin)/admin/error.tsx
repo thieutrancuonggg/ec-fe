@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { Result, Button } from "antd";
+import { Result } from "antd";
+import { Button } from "@/shared/components/ui/Button";
 
 interface AdminErrorProps {
   error: Error & { digest?: string };
@@ -19,7 +20,7 @@ export default function AdminError({ error, reset }: AdminErrorProps) {
       title="Admin error"
       subTitle={error.message || "An unexpected error occurred in the admin panel."}
       extra={[
-        <Button key="retry" type="primary" size="small" onClick={reset}>
+        <Button key="retry" variant="primary" size="sm" onClick={reset}>
           Try again
         </Button>,
       ]}

@@ -6,7 +6,7 @@ import {
   ApolloClient,
   InMemoryCache,
 } from "@apollo/client-integration-nextjs";
-import { ApolloLink, HttpLink, from, CombinedGraphQLErrors } from "@apollo/client";
+import { ApolloLink, HttpLink, from, CombinedGraphQLErrors, type Reference } from "@apollo/client";
 import { ErrorLink } from "@apollo/client/link/error";
 import { env } from "@/config/env";
 import { useAuthStore } from "@/modules/auth/store/authStore";
@@ -56,9 +56,15 @@ function createCache() {
           products: {
             keyArgs: ["filter", "sort"],
             merge(existing = { data: [] }, incoming) {
+              const seen = new Set(
+                (existing.data ?? []).map((ref: Reference) => ref.__ref)
+              );
+              const dedupedIncoming = (incoming.data ?? []).filter(
+                (ref: Reference) => !seen.has(ref.__ref)
+              );
               return {
                 ...incoming,
-                data: [...(existing.data ?? []), ...(incoming.data ?? [])],
+                data: [...(existing.data ?? []), ...dedupedIncoming],
               };
             },
           },
@@ -68,7 +74,7 @@ function createCache() {
   });
 }
 
-export function getApolloClient(): ApolloClient {
+export function createApolloClient(): ApolloClient {
   return new ApolloClient({
     link: from([createAuthLink(), createErrorLink(), createHttpLink()]),
     cache: createCache(),
