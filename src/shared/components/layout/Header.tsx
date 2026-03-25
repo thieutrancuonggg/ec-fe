@@ -2,15 +2,16 @@ import Link from "next/link";
 import { Container } from "./Container";
 import { siteConfig } from "@/config/site";
 import { CartHeaderButton } from "@/modules/cart/components/CartHeaderButton";
+import { WishlistHeaderButton } from "@/modules/wishlist/components/WishlistHeaderButton";
 import { SearchBar } from "./SearchBar";
 import { MobileMenuButton } from "./MobileMenu";
 import { UserMenu } from "./UserMenu";
 
 const navLinks = [
-  { label: "Tất cả sản phẩm", href: "/products" },
-  { label: "Hàng mới về", href: "/products?category=new" },
-  { label: "Bán chạy nhất", href: "/products?sort=popular" },
-  { label: "Khuyến mãi", href: "/products?sale=true" },
+  { label: "Trang chủ", href: "/" },
+  { label: "Sản phẩm", href: "/products" },
+  { label: "Blog", href: "/blog" },
+  { label: "Liên hệ", href: "/contact" },
 ];
 
 export function Header() {
@@ -59,6 +60,7 @@ export function Header() {
                 color: "#2563EB",
                 textDecoration: "none",
                 marginRight: 8,
+                textTransform: "uppercase",
               }}
             >
               {siteConfig.name}
@@ -92,6 +94,7 @@ export function Header() {
               <div style={{ width: 1, height: 22, background: "#e2e8f0", margin: "0 2px" }} className="hidden sm:block" />
               <UserMenu />
               <div style={{ width: 1, height: 22, background: "#e2e8f0", margin: "0 2px" }} className="hidden sm:block" />
+              <WishlistHeaderButton />
               <CartHeaderButton />
             </div>
           </div>

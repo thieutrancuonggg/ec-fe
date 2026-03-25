@@ -13,18 +13,25 @@ import { useAuth } from "../hooks/useAuth";
 const schema = z
   .object({
     name: z
-      .string()
+      .string({ error: "Họ tên là bắt buộc" })
+      .trim()
       .min(1, "Họ tên là bắt buộc")
       .max(100, "Họ tên không được vượt quá 100 ký tự"),
-    email: z.string().min(1, "Email là bắt buộc").email("Email không hợp lệ"),
+    email: z
+      .string({ error: "Email là bắt buộc" })
+      .trim()
+      .min(1, "Email là bắt buộc")
+      .email("Email không hợp lệ"),
     password: z
-      .string()
+      .string({ error: "Mật khẩu là bắt buộc" })
       .min(8, "Mật khẩu phải có ít nhất 8 ký tự")
       .max(128, "Mật khẩu không được vượt quá 128 ký tự")
       .regex(/[A-Z]/, "Phải chứa ít nhất một chữ hoa")
       .regex(/[a-z]/, "Phải chứa ít nhất một chữ thường")
       .regex(/[0-9]/, "Phải chứa ít nhất một chữ số"),
-    confirmPassword: z.string().min(1, "Vui lòng xác nhận mật khẩu"),
+    confirmPassword: z
+      .string({ error: "Vui lòng xác nhận mật khẩu" })
+      .min(1, "Vui lòng xác nhận mật khẩu"),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Mật khẩu không khớp",

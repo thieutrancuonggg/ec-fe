@@ -7,10 +7,10 @@ import { MenuOutlined } from "@ant-design/icons";
 import { Button } from "@/shared/components/ui/Button";
 
 const navItems = [
-  { key: "shop", label: <Link href="/products">Tất cả sản phẩm</Link> },
-  { key: "new", label: <Link href="/products?category=new">Hàng mới về</Link> },
-  { key: "bestsellers", label: <Link href="/products?sort=popular">Bán chạy nhất</Link> },
-  { key: "sale", label: <Link href="/products?sale=true">Khuyến mãi</Link> },
+  { key: "home", label: <Link href="/">Trang chủ</Link> },
+  { key: "products", label: <Link href="/products">Sản phẩm</Link> },
+  { key: "blog", label: <Link href="/blog">Blog</Link> },
+  { key: "contact", label: <Link href="/contact">Liên hệ</Link> },
 ];
 
 export function MobileMenuButton() {
